@@ -18,11 +18,9 @@ export class LoginComponent implements OnInit {
   user: User = new User();
   loginForm: FormGroup;
   invalidLogin: boolean = false;
-  errorMessage = 'Invalid Credentials';
+  errorMessage = "";
   successMessage: string;
   loginSuccess = false;
-  email: string;
-  password : string;
   constructor(private formBuilder: FormBuilder,private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
@@ -31,20 +29,22 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
   }
-  login() {
-    console.log(this.user.email);
-    this.authService.authenticate(this.user, (e) => {
-      this.router.navigateByUrl('/home');
-      this.invalidLogin = false;
-      this.loginSuccess = true;
-      this.successMessage = 'Login Successful.';
-      console.log(e);
-      let resp: any;
-      resp = e.principal;
-      if (resp) {
-        localStorage.setItem('currentUser', JSON.stringify(resp));
-      }
-    });
-  }
+  get email() { return this.loginForm.get('email'); }
+  get password() { return this.loginForm.get('password'); }
 
+  login() {
+    this.loginSuccess = true;
+    this.authService.login( this.email.value, this.password.value).subscribe((data) => {
+       if (this.authService.isLoggedIn) {
+        this.successMessage = "Connected!";
+        console.log(this.successMessage);
+         console.log("aici");
+            const redirect = '/api/home';
+                this.router.navigate([redirect]);
+      } else {
+            this.errorMessage = 'email or password is incorrect.';
+      }
+      }
+    );
+  }
 }

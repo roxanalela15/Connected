@@ -6,10 +6,10 @@ import { HomeComponent } from './home/home.component';
 import { UrlPermission } from './services/permission';
 
 const routes: Routes = [
-  {path:'register',component:RegisterComponent},
-  {path:'login',component:LoginComponent},
-  {path:'home',component:HomeComponent, canActivate: [UrlPermission]},
-  {path:'logout',redirectTo:'login'},
+  {path:'api/user/register',component:RegisterComponent},
+  {path:'api/user/login',component:LoginComponent},
+  {path:'api/home',component:HomeComponent, canActivate: [UrlPermission]},
+  {path:'api/user/logout',redirectTo:'api/user/login'},
 
 ];
 

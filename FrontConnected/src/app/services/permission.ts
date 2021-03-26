@@ -11,7 +11,7 @@ export class UrlPermission implements CanActivate {
       return true;
     }
 
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
+    this.router.navigate(['/api/user/login'], { queryParams: { returnUrl: state.url }});
     return false;
   }
 }

@@ -21,9 +21,9 @@ public class UserController {
     private UserService userService;
 
     @CrossOrigin
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public RegisterResponse SignUp(HttpServletResponse response, @RequestBody User user){
-        try{
+    @RequestMapping(value = "/api/user/register", method = RequestMethod.POST)
+    public RegisterResponse register(HttpServletResponse response, @RequestBody User user) {
+        try {
             user.setPicByte(this.bytes);
             user.setRole("ROLE_USER");
 
@@ -33,7 +33,7 @@ public class UserController {
             userService.save(user);
             this.bytes = null;
             return new RegisterResponse("Success!", true);
-        }catch(Exception e){
+        } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return new RegisterResponse("Error!", false);
         }
@@ -45,12 +45,23 @@ public class UserController {
 //    }
 
     @CrossOrigin
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public User user(User user) {
-        return user;
-    }
+    @RequestMapping(value = "/api/user/login", method = RequestMethod.POST)
+    public User login(@ModelAttribute("email") String email, @ModelAttribute("password") String password) {
+        User user = userService.find(email);
+        if (user != null)
+        {
+            if (user.getPassword().equals(password)) {
+                return user;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
 
-    @PostMapping("/upload")
+    }
+    @CrossOrigin
+    @RequestMapping(value = "/api/user/upload", method = RequestMethod.POST)
     public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
         this.bytes = file.getBytes();
     }

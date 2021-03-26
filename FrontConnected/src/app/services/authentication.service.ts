@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -15,31 +16,21 @@ export class AuthenticationService {
     authenticated = false;
     constructor(private http: HttpClient, private router: Router) {
     }
-    
-    
-    authenticate(user, callback) {
-      const encodedcredentials: string = btoa(user.email + ':' + user.password);
-      console.log(encodedcredentials);
-      let basicHeader = "Basic "+encodedcredentials;
-      let headers = new HttpHeaders ({
-      'Content-Type' : 'application/x-www-form-urlencoded',
-      'Authorization' : basicHeader
-  });
-    console.log(headers);
-      this.http.get('http://localhost:8080/login', {headers: headers})
-    .subscribe((response) => {
-        let data: any ;
-        data = response;
-        console.log(data);
-        if (response['email']) {
-            this.authenticated = true;
-        } else {
-            this.authenticated = false;
+   
+  login(email: string, password: string) {
+    let postData = {email : email,password :password};
+    console.log(email);
+    return this.http.post('http://localhost:8080/api/user/login', postData)
+    .pipe(map(user => {
+        if (user) {
+          console.log(email);
+          localStorage.setItem('currentUser', JSON.stringify(user));
+          return user;
         }
-        return callback && callback(data);
-    });
-  
-  }
+      }),
+      
+    );
+    }
 
     // login(user: User) {
     //     console.log(user.email);
@@ -54,11 +45,11 @@ export class AuthenticationService {
     //   }
 
     logout() {
-        return this.http.post('http://localhost:8080/logout', {})
+        return this.http.post('http://localhost:8080/api/user/logout', {})
         .subscribe((response) => {
           console.log(localStorage.getItem('currentUser'));
           localStorage.removeItem('currentUser');
-          this.router.navigate(['/login']);
+          this.router.navigate(['/api/user/login']);
         },
         error => {
     
@@ -70,6 +61,7 @@ export class AuthenticationService {
     }
     
     isLoggedIn() {
+      console.log("AM AJUNS AICI" + localStorage.getItem('currentUser'));
         if (localStorage.getItem('currentUser')) {
           return true;
         }

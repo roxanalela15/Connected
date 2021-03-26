@@ -29,23 +29,23 @@ export class HomeComponent implements OnInit {
   }
 
   openMessages() {
-    this.router.navigate(['home'], { queryParams: { action: 'messages' } }); 
+    this.router.navigate(['api/home'], { queryParams: { action: 'messages' } }); 
   }
   openProfile() {
-    this.router.navigate(['home'], { queryParams: { action: 'user-profile' } }); 
+    this.router.navigate(['api/home'], { queryParams: { action: 'user-profile' } }); 
   }
   openPeople() {
-    this.router.navigate(['home'], { queryParams: { action: 'people' } }); 
+    this.router.navigate(['api/home'], { queryParams: { action: 'people' } }); 
   }
 
   openCalendar() {
-    this.router.navigate(['home'], { queryParams: { action: 'calendar' } }); 
+    this.router.navigate(['api/home'], { queryParams: { action: 'calendar' } }); 
   }
   openNotes() {
-    this.router.navigate(['home'], { queryParams: { action: 'notes' } }); 
+    this.router.navigate(['api/home'], { queryParams: { action: 'notes' } }); 
   }
   openSettings() {
-    this.router.navigate(['home'], { queryParams: { action: 'settings' } }); 
+    this.router.navigate(['api/home'], { queryParams: { action: 'settings' } }); 
   }
   signOut(){
     this.authenticationService.logout();
