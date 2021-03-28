@@ -1,26 +1,24 @@
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-import { environment } from '@environments/environment';
-import { AuthenticationService } from '@app/services/authentication.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService) { }
+export class AuthInterceptorService implements HttpInterceptor {
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const currentUser = this.authenticationService.currentUserValue;
-        const isLoggedIn = currentUser && currentUser.token;
-        const isApiUrl = request.url.startsWith(environment.apiUrl);
-        if (isLoggedIn && isApiUrl) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${currentUser.token}`
-                }
+    constructor(private authService: AuthenticationService) { }
+
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        if (this.authService.isUserLoggedin() && req.url.indexOf('basicauth') === -1) {
+            const request = req.clone({
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${window.btoa(this.authService.email + ":" + this.authService.password)}`
+                })
             });
+            return next.handle(request);
         }
-
-        return next.handle(request);
+        
+		return next.handle(req);
     }
 }

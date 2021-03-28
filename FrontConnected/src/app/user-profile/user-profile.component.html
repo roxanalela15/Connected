@@ -1,4 +1,7 @@
 <p>user-profile works!</p>
-<p> {{currentUser.email}} </p>
+
+<div [hidden]="!isLoggedin">
+	<p>Welcome back, {{ loggedinUser }}!</p>
+</div>
 
 

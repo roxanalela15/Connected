@@ -16,8 +16,7 @@ import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from './services/client-service';
 import { AuthenticationService } from './services/authentication.service';
-import { UrlPermission } from './services/permission';
-import { AuthInterceptor } from './services/authinterceptor';
+import { AuthInterceptorService } from './services/authinterceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,10 +40,11 @@ import { AuthInterceptor } from './services/authinterceptor';
   ],
 
   providers: [
-    //{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    ClientService,
-    AuthenticationService,
-    UrlPermission
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

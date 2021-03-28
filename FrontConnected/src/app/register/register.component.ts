@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, OnDestroy,EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
 import { ConfirmedValidator } from '../confirmed.validator';
 import { User } from '../models/user';
 import { AuthenticationService } from '../services/authentication.service';
@@ -33,7 +32,6 @@ export class RegisterComponent implements OnInit { //, OnDestroy
 
   constructor(private httpClient: HttpClient,private http: ClientService,
      private readonly router: Router,
-     private authenticationService: AuthenticationService,
      private formBuilder: FormBuilder,
 ) { }
 

@@ -1,6 +1,8 @@
+
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
-import { User } from '../models/user';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -9,13 +11,21 @@ import { User } from '../models/user';
 })
 export class UserProfileComponent implements OnInit {
 
-  currentUser: User;
-  constructor(private authenticationService: AuthenticationService) { 
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  }
+	isLoggedin = false;
+	
+	loggedinUser: string = '';
 
-  ngOnInit(): void {
-    console.log('currentUser', this.currentUser);
-  }
+	greeting = {};
+
+	constructor(private router: Router, private authenticationService: AuthenticationService) {}
+
+	ngOnInit() {
+		this.isLoggedin = this.authenticationService.isUserLoggedin();
+		this.loggedinUser = this.authenticationService.getLoggedinUser();
+
+		if(!this.isLoggedin) {
+			this.router.navigateByUrl('/api/user/login');
+		}
+	}
 
 }

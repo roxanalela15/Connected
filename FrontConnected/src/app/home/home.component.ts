@@ -47,7 +47,8 @@ export class HomeComponent implements OnInit {
   openSettings() {
     this.router.navigate(['api/home'], { queryParams: { action: 'settings' } }); 
   }
-  signOut(){
-    this.authenticationService.logout();
-  }
+  logout() {
+		this.authenticationService.logout();
+		this.router.navigateByUrl('/api/user/login');
+	}
 }
