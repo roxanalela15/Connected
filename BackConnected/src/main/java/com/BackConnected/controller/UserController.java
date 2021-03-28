@@ -6,12 +6,17 @@ import com.BackConnected.model.User;
 import com.BackConnected.repository.UserRepository;
 import com.BackConnected.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 @RestController
 public class UserController {
 
@@ -19,6 +24,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
     @CrossOrigin
     @RequestMapping(value = "/api/user/register", method = RequestMethod.POST)
@@ -38,36 +44,17 @@ public class UserController {
             return new RegisterResponse("Error!", false);
         }
     }
-//
-//    @RequestMapping(value = "/login", method = RequestMethod.GET)
-//    public Iterable<User> getUsers(){
-//        return userRepository.findAll();
-//    }
 
-    @CrossOrigin
-    @RequestMapping(value = "/api/user/login", method = RequestMethod.POST)
-    public User login(@ModelAttribute("email") String email, @ModelAttribute("password") String password) {
-        User user = userService.find(email);
-        if (user != null)
-        {
-            if (user.getPassword().equals(password)) {
-                return user;
-            } else {
-                return null;
-            }
-        } else {
-            return null;
-        }
-
-    }
     @CrossOrigin
     @RequestMapping(value = "/api/user/upload", method = RequestMethod.POST)
     public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
         this.bytes = file.getBytes();
     }
-//
-//    @PutMapping("/update/{id}")
-//    public void updateUser(@RequestBody User user,@PathVariable("id") final Long id) {
-//        userRepository.save(user);
-//    }
+
+    @CrossOrigin
+    @GetMapping("/api/user/login")
+    public Principal user(Principal user) {
+        return user;
+    }
+
 }
