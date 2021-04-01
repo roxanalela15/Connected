@@ -17,7 +17,9 @@ import { Observable } from 'rxjs';
     registerUser(user: User) {
         return this.http.post<User>('http://localhost:8080/api/user/register', user);
       }
-    // getUser(){
-    //     return this.http.get<User[]>('http://localhost:8080/login');
-    //   }
+ 
+    getUsers() {
+      return this.http.get<User[]>('http://localhost:8080/api/people');
+    }
+  
     }

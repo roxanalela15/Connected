@@ -16,9 +16,11 @@ public class UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
-
     public User find(String email) {
         return userRepository.findByEmail(email);
+    }
+    public Iterable<User> findAll() {
+        return userRepository.findAll();
     }
 
 }

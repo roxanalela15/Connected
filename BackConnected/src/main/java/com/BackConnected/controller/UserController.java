@@ -1,4 +1,5 @@
 package com.BackConnected.controller;
+import java.io.Console;
 import java.security.Principal;
 
 import com.BackConnected.model.RegisterResponse;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private byte[] bytes;
@@ -25,8 +27,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    UserRepository userRepository;
 
-    @CrossOrigin
     @RequestMapping(value = "/api/user/register", method = RequestMethod.POST)
     public RegisterResponse register(HttpServletResponse response, @RequestBody User user) {
         try {
@@ -45,16 +48,22 @@ public class UserController {
         }
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/user/upload", method = RequestMethod.POST)
     public void uploadImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
         this.bytes = file.getBytes();
     }
 
-    @CrossOrigin
     @GetMapping("/api/user/login")
     public Principal user(Principal user) {
         return user;
     }
+
+
+    @GetMapping("/api/people")
+    public Iterable<User> getUsers(){
+        System.out.println(userRepository.findAll());
+        return userRepository.findAll();
+    }
+
 
 }

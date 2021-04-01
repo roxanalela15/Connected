@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+  }
+.content {
+  width: 90%;
+  height:700px;
+  border: 1px solid grey;
+  margin-top: 10px;
+}
+
+  
+  .left {
+    width: 5%;
+    height:700px;
+    float: left;
+    padding: 10px;
+  }
+
+  
+ .right {
+    width: 5%;
+    height:700px;
+    float: right;
+    padding: 10px;
+  }
+
+  .row{
+    display: flex;
+    flex-direction: row;
+  }

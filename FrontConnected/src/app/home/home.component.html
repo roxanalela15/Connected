@@ -30,26 +30,3 @@
 </div> 
 -->
 
-<div class="row">
-    <div class="column left">
-        <div class="menu1">
-            <button type="button"><i class="fa fa-user-circle" (click)="openProfile()"></i></button>
-             <button type="button"><i class="fa fa-comments-o" (click)="openMessages()"></i></button>
-             <button type="button"><i class="fa fa-group" (click)="openPeople()"></i></button>
-        </div>
-    </div>
-    <div class="column middle">
-        <app-user-profile *ngIf="action === 'user-profile'"></app-user-profile>
-        <app-people *ngIf="action === 'people'"></app-people> 
-        <app-messages *ngIf="action === 'messages'"></app-messages> 
-        <app-calendar *ngIf="action === 'calendar'"></app-calendar>
-        <app-settings *ngIf="action === 'settings'"></app-settings>
-    </div>
-    <div class="column right">
-        <div class="menu2">
-            <button type="button"><i class="fa fa-calendar" data-toggle="collapse" (click)="openCalendar()"></i></button>
-            <button type="button"><i class="fa fa-cog" (click)="openSettings()"></i></button>
-            <button type="button"><i class="fa fa-sign-out" (click)="logout()"></i></button>
-        </div>
-    </div>
-  </div>
