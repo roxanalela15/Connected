@@ -20,29 +20,29 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-//    @Autowired
-//    AppUserDetailsService appUserDetailsService;
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(appUserDetailsService);
-//    }
-//
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurerAdapter() {
-//            @Override
-//            public void addCorsMappings(CorsRegistry registry) {
-//                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
-//
-//            }
-//        };
-//    }
-//
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        super.configure(web);
-//    }
+    @Autowired
+    AppUserDetailsService appUserDetailsService;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(appUserDetailsService);
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurerAdapter() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+
+            }
+        };
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        super.configure(web);
+    }
 //
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
@@ -56,8 +56,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //    }
 @Override
 protected void configure(HttpSecurity http) throws Exception {
-    http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest()
-            .authenticated().and().httpBasic();
+    //http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest()
+            //.authenticated().and().httpBasic();
+
+    http.cors().and()
+                .authorizeRequests()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated().and()
+                .httpBasic().and()
+                .csrf().disable();
 }
 
     @SuppressWarnings("deprecation")
