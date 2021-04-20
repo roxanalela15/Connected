@@ -9,7 +9,9 @@
   },
   "files": [
     "src/test.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
+    
+    "node_modules/ng2-stomp-service/dist/stomp.service.ts"
   ],
   "include": [
     "src/**/*.spec.ts",

@@ -13,6 +13,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+	    "allowedCommonJsDependencies": [
+        	"rxjs-compat",
+		"stompjs",
+		"jquery",
+		"sockjs-client",
+		"ng2-stomp-service"
+         
+     		],
             "outputPath": "dist/FrontConnected",
             "index": "src/index.html",
             "main": "src/main.ts",

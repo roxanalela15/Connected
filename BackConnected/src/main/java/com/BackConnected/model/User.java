@@ -30,8 +30,8 @@ public class User implements UserDetails {
     private String role;
     @Column(name = "picByte", length = 100000)
     private byte[] picByte;
-
-
+    @Column(name = "connected", nullable = false)
+    private Boolean connected = false;
 
     public byte[] getPicByte() {
         return picByte;
@@ -60,11 +60,23 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String getEmail() {
+        return email;
+    }
     public void setRole(String role) { this.role = role; }
     public String getRole() {
         return role;
     }
     public void setPassword(String password) { this.password = password; }
+
+    public Boolean getConnected() {
+        return connected;
+    }
+
+    public void setConnected(Boolean connected) {
+        this.connected = connected;
+    }
+
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -104,4 +116,37 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() {
         return true;
     }
+
+
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (userId == null) {
+            if (other.userId != null)
+                return false;
+        } else if (!userId.equals(other.userId))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "User [id=" + userId + ", username=" + email + "]";
+    }
+
 }
