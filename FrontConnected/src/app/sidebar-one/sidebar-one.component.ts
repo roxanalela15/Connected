@@ -13,7 +13,7 @@ export class SidebarOneComponent implements OnInit {
   ngOnInit(): void {
   }
   openMessages() {
-    this.router.navigate(['api/messages']); 
+    this.router.navigate(['home']); 
   }
   openProfile() {
     this.router.navigate(['api/user-profile']); 

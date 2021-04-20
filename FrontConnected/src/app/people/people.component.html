@@ -1,13 +1,13 @@
- 
-    <table>
-        <tbody>
-            <tr *ngFor="let user of users">
-              <td><img src="{{user.retrievedImage}}" alt="Avatar" style="width:50px" ></td>
-              <td>{{user.firstName}} {{user.lastName}}</td>
-              <td>
-                <button type="button" class="btn btn-primary" (click)="sendMessage(user.userId)">Message</button>
-              </td>
-            </tr>
-          </tbody> 
-    </table>
- 
+<div class="row">
+  <div class="left"> 
+      <app-sidebar-one></app-sidebar-one>
+  </div>
+  
+  <div class="content">
+      <p>all users</p>>
+  </div>
+  
+  <div class="right">
+      <app-sidebar-two></app-sidebar-two>
+  </div>    
+</div>

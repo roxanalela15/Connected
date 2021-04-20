@@ -15,7 +15,7 @@ export class AuthenticationService {
 	constructor(private http: HttpClient) {}
 
 	authenticate(email: String, password: String) {
-		return this.http.get('http://localhost:8080/api/user/login', { 
+		return this.http.post('http://localhost:8080/login', { 
 			headers: { authorization: this.createBasicAuthToken(email, password) }}).pipe(map((res) => {
 				this.email = email;
 				this.password = password;				
@@ -39,13 +39,19 @@ export class AuthenticationService {
 
 	isUserLoggedin() {
 		let user = sessionStorage.getItem(this.SESSION_KEY)
+		
 		if (user === null) return false
 		return true
 	}
 
 	getLoggedinUser() {
 		let user = sessionStorage.getItem(this.SESSION_KEY)
+		console.log("currentuser from service ",user);
 		if (user === null) return ''
 		return user
 	}
+
+	findUsers() {
+        return this.http.get('http://localhost:8080/listUsers');
+    }
 }

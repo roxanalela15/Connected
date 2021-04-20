@@ -1,42 +1,53 @@
-<!--view student-->
-<table id="calendar">
-    <button  (click)="onPreviousMonth()"> Previous </button>
-    <button  (click)="onNextMonth()"> Next </button>
-    <caption>{{ calendarService.getMonthName(monthNumber) }} &nbsp; {{ year }}</caption>
-   
-    <tr class="weekdays">
-      <th scope="col" *ngFor='let weekDay of weekDaysName'>
-        {{ weekDay }}
-      </th>
-    
-    </tr>
+
+<div class="row">
+  <div class="left"> 
+      <app-sidebar-one></app-sidebar-one>
+  </div>
   
-    <tr class="days">
-      <td *ngFor='let day of monthDays' class="day">
-        <div>{{ day.number }}</div>
-        <div *ngIf="day.number===1" class="event">
-            <a href="javascript:void(0);" (click)="div1Function()">
-              <div class="event-desc">
-                  Test
-              </div>
-          </a>
-         </div>
-        
-      </td>
+  <div class="content">
+    <table id="calendar">
+      <button  (click)="onPreviousMonth()"> Previous </button>
+      <button  (click)="onNextMonth()"> Next </button>
+      <caption>{{ calendarService.getMonthName(monthNumber) }} &nbsp; {{ year }}</caption>
+     
+      <tr class="weekdays">
+        <th scope="col" *ngFor='let weekDay of weekDaysName'>
+          {{ weekDay }}
+        </th>
       
-    </tr>
-   
-  </table>
-
-<div *ngIf="div1">
-  <div class="event-desc">
-    Test
+      </tr>
+    
+      <tr class="days">
+        <td *ngFor='let day of monthDays' class="day">
+          <div>{{ day.number }}</div>
+          <div *ngIf="day.number===1" class="event">
+              <a href="javascript:void(0);" (click)="div1Function()">
+                <div class="event-desc">
+                    Test
+                </div>
+            </a>
+           </div>
+          
+        </td>
+        
+      </tr>
+     
+    </table>
+  
+  <div *ngIf="div1">
+    <div class="event-desc">
+      Test
+    </div>
+    <div class="event-time">
+      1:00pm to 3:00pm
+    </div>
+    <div class="event-host">
+      prof. Roxana Lela
+    </div>
   </div>
-  <div class="event-time">
-    1:00pm to 3:00pm
   </div>
-  <div class="event-host">
-    prof. Roxana Lela
-  </div>
+  
+  <div class="right">
+      <app-sidebar-two></app-sidebar-two>
+  </div>    
 </div>
-

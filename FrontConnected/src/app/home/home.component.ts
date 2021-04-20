@@ -9,18 +9,18 @@ import { AuthenticationService } from '@app/services/authentication.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  SESSION_KEY: any;
   action: string; 
   currentUser: User;
   constructor(
     private router: Router,private activedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService
 ) {
-  this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  this.currentUser = JSON.parse(localStorage.getItem(this.SESSION_KEY));
 }
 
   ngOnInit(): void {
-    console.log('currentUser', this.currentUser);
+    console.log('currentUser from home', this.authenticationService.getLoggedinUser());
     this.activedRoute.queryParams.subscribe(
       (params) => {
         this.action = params['action'];

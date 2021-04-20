@@ -1,0 +1,29 @@
+<div style="width: 100%; min-height: 480px;" class="message-col">
+  <mat-list id="msg-container" class="message-container">
+    <mat-list-item *ngFor="let message of filteredMessages" class="message-item"
+      [style.background]="message.sender === email ? 'rgba(80,150,220, 0.4)':'rgba(150,150,150, 0.3)'">
+      <mat-icon mat-list-icon></mat-icon>
+      <h4 mat-line><b>{{message.sender === email ? 'You': message.sender}}</b>: {{message.content}}</h4>
+      {{message.timestamp}}
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<div class="type_msg">
+  <div class="input_msg_write">
+    <input type="text" class="write_msg" placeholder="Type a message" #newmsg />
+    <button [disabled]="channel === null || channel === undefined" class="msg_send_btn" type="button"
+      (click)=sendMessage(newmsg.value)>
+      <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+    </button>
+  </div>
+  <button type="button" class="toggle-emoji" (click)="toggleEmojiPicker()">😀
+
+  </button>
+  <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"
+    title="Pick your emoji…"></emoji-mart>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <input type="file" (change)="onFileChange($event)" />
+    <input type="submit" [disabled]="formGroup.invalid" value="upload" />
+  </form>
+</div>

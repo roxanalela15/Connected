@@ -1,0 +1,121 @@
+.hand {
+	cursor: pointer;
+}
+
+.main-container {
+	height: 100%;
+}
+
+.main-container {
+	width: 100%;
+	height: 200px;
+}
+
+.header-container {
+	width: 100%;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+}
+
+.user-header {
+	font-size: 1.3vw;
+	font-family: verdana;
+	color: #202080;
+}
+
+.receiver-header {
+	background: rgba(150,150,150, 0.3);
+	font-size: 1.3vw;
+	font-family: verdana;
+	color: #202080;
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.chat-table {
+	margin-top: 10px;
+}
+
+.user-list-col {
+	min-width: 100px;
+}
+
+::ng-deep mat-grid-tile.wt-justify .mat-figure {
+    align-items: initial;  /*vertical alignment*/
+    justify-content: initial;  /*horizontal alignment*/
+}
+
+.user-container {
+	width: 100%;
+	padding: 5px;
+}
+
+.cell-border {
+	border: 2px solid #bbb; padding: 5px;
+}
+
+.message-wrapper {
+	width: 100%;
+	padding: 5px;
+}
+
+.content {
+	width: 90%;
+	height:700px;
+	border: 1px solid grey;
+	margin-top: 10px;
+  }
+  
+	
+	.left {
+	  width: 5%;
+	  height:700px;
+	  float: left;
+	  padding: 10px;
+	}
+  
+	
+   .right {
+	  width: 5%;
+	  height:700px;
+	  float: right;
+	  padding: 10px;
+	}
+  
+	.row{
+	  display: flex;
+	  flex-direction: row;
+	}
+	
+
+	/* nn */
+
+	.column {
+		float: left;
+		width: 50%;
+		padding: 10px;
+		height:700px;
+	  }
+	  .lefte {
+		width: 25%;
+		/* overflow:scroll;
+		overflow-x: hidden; */
+	  }
+	  
+	  .righte {
+		width: 70%;
+		/* overflow:scroll;
+		overflow-x: hidden; */
+	  }
+	  
+	  
+	  /* Clear floats after the columns */
+	  .rowe:after {
+		content: "";
+		display: table;
+		clear: both;
+	  }
+	
+	 
+	  

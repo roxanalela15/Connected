@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
 		this.loggedinUser = this.authenticationService.getLoggedinUser();
 
 		if(!this.isLoggedin) {
-			this.router.navigateByUrl('/api/user/login');
+			this.router.navigateByUrl('');
 		}
 	}
 

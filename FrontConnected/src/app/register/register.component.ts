@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit { //, OnDestroy
           this.http.registerUser(this.registerForm.value).subscribe(
             (user) => {
             console.log(this.user);
-            this.router.navigate(['/api/user/login']);
+            this.router.navigate(['']);
           });
         }
         console.log('Image uploaded successfully');
