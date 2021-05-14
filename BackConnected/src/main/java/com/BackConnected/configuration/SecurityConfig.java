@@ -1,6 +1,5 @@
 package com.BackConnected.configuration;
 
-import com.BackConnected.service.AppUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
@@ -24,13 +23,13 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    AppUserDetailsService appUserDetailsService;
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(appUserDetailsService);
-    }
+//    @Autowired
+//    AppUserDetailsService appUserDetailsService;
+//
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(appUserDetailsService);
+//    }
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

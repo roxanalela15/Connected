@@ -43,7 +43,7 @@ export class MesajeComponent implements OnInit {
             , private channelService: ConversationService) { }
 
     ngOnInit() {
-      this.email = sessionStorage.getItem('auth_user');
+      this.email = sessionStorage.getItem('email');
       console.log("mesaj,, curent user",this.email);
       this.channelService.getChannel().subscribe(channel => {
           this.channel = channel;

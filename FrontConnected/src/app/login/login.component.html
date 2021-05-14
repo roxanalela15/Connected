@@ -8,32 +8,86 @@
 <p></p>
 <div class="container">
 	<div class="card bg-light">
-	<article class="card-body mx-auto" style="max-width: 400px;">
-		<h4 class="card-title mt-3 text-center">Login</h4>
-		<form name="loginForm" (ngSubmit)="login()">
-			<div class="form-group input-group">
-				<div class="input-group-prepend">
-					<span class="input-group-text"> <i class="fa fa-user"></i> </span>
-				 </div>
-				<input name='email' [(ngModel)]="email" class="form-control" placeholder="Email" type="text">
-			</div>
-			<div class="form-group input-group">
-				<div class="input-group-prepend">
-					<span class="input-group-text"> <i class="fa fa-key"></i> </span>
-				 </div>
-				<input name='password' [(ngModel)]="password" class="form-control" placeholder="Password" type="password">
-			</div>
-			                        
-			<div class="form-group">
-				<button class="btn btn-primary btn-block">
-					 Login
-				</button>
-			</div>     
-			<div class="alert alert-warning" *ngIf='error'>{{error}}</div>
-			<p class="text-center">Don't have an account? <a routerLink="/api/user/register" routerLinkActive="active">Sign Up</a> </p>                                                                 
+		<article class="card-body mx-auto" style="max-width: 400px;">
+			<h4 class="card-title mt-3 text-center">Login</h4>
+			<form method="POST" [formGroup]="formgroup" name="myForm" (ngSubmit)="login()">
+				<div class="form-group input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+					</div>
+					<input type="email" id="email" class="form-control input-sm" placeholder="Enter User Email"
+						[ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email" required />
+					<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+						<div *ngIf="f.email.errors.required">Email is required</div>
+					</div>
+				</div>
+				<div class="form-group input-group">
+					<div class="input-group-prepend">
+						<span class="input-group-text"> <i class="fa fa-key"></i> </span>
+					</div>
+					<input type="password" id="password" class="form-control input-sm"
+								placeholder="Enter User password."
+								[ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password"
+								required />
+							<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+								<div *ngIf="f.password.errors.required">Password is required</div>
 
-		</form>
-	</article>
-	</div> 
-	
-	</div> 
+							</div>
+				</div>
+
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary btn-block">
+						Login
+					</button>
+				</div>
+
+				<p class="text-center">Don't have an account? <a routerLink="/api/user/register"
+						routerLinkActive="active">Sign Up</a> </p>
+			</form>
+			<!-- <form method="POST" [formGroup]="formgroup" name="myForm" class="form-horizontal" (submit)="login()">
+
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="email">
+							Email
+						</label>
+						<div class="col-md-7">
+							<input type="email" id="email" class="form-control input-sm" placeholder="Enter User Email"
+								[ngClass]="{ 'is-invalid': submitted && f.email.errors }" formControlName="email"
+								required />
+							<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+								<div *ngIf="f.email.errors.required">Email is required</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label class="col-md-2 control-lable" for="password">
+							Password
+						</label>
+						<div class="col-md-7">
+							<input type="password" id="password" class="form-control input-sm"
+								placeholder="Enter User password."
+								[ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password"
+								required />
+							<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+								<div *ngIf="f.password.errors.required">Password is required</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-actions floatRight">
+						<button type="submit" class="btn btn-primary btn-sm ml-4 mr-2">
+							Login
+						</button>
+
+					</div>
+				</div>
+			</form> -->
+		</article>
+	</div>
+
+</div>

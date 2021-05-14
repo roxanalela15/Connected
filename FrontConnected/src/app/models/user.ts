@@ -1,8 +1,7 @@
 
 export class User {
     userId: number;
-    firstName: string;
-    lastName: string;
+    name: string;
     email: string;
     password: string;
     confirmpassword: string;
@@ -10,5 +9,9 @@ export class User {
     picByte: string;
     retrievedImage: string;
     token?: string;
-    
+    constructor(userId: number, name: string, email: string){
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+    }
 }

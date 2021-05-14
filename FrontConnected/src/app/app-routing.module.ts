@@ -9,6 +9,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AcasaComponent } from './acasa/acasa.component';
 import { UtilizatoriComponent } from './utilizatori/utilizatori.component';
+import { VideoCallComponent } from './video-call/video-call.component';
 //import { SigninComponent } from './signin/signin.component';
 const routes: Routes = [
   {path:'api/user/register',component:RegisterComponent},
@@ -19,7 +20,9 @@ const routes: Routes = [
   {path:'api/settings',component:SettingsComponent},
   {path:'api/calendar',component:CalendarComponent},
   { path: '', component: LoginComponent },
-  {path: 'home',component:AcasaComponent}
+  {path: 'home',component:AcasaComponent},
+  
+  {path: 'video-call/:id', component: VideoCallComponent}
   
 ];
 

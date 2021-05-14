@@ -1,16 +1,97 @@
 
 <div class="row">
-    <div class="left"> 
+    
+    <div class="left">
         <app-sidebar-one></app-sidebar-one>
     </div>
-    
     <div class="content">
-        <div [hidden]="!isLoggedin">
-			<p>Welcome back, {{ loggedinUser }}!</p>
-		</div>
+        <app-header></app-header>
+        <hr>
+        <header *ngIf="authService.isAuthenticated()">
+            <div class="container-fluid">
+                <div class="row">
+                    {{user.name}}
+                    <div class="col-sm-2 ml-3 centered text-center float-right"
+                        *ngIf="!imageUploaded && authService.isAuthenticated()">
+                        <img src="../../assets/images/default-user.png" style="width: 150px; height: 150px;">
+                        <div class="row">
+                            <div class="ml-2 col-sm-7">
+                                <input type="file" (change)=onFileChanged($event)>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 mt-1">
+                            <button class="btn btn-outline-success centered text-center" type="button"
+                                (click)="onImageUpload()"> Upload</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 centered text-center float-right"
+                        *ngIf="imageUploaded && authService.isAuthenticated()">
+                        <a (click)="openWindowCustomClass(content)" style="cursor: pointer;">
+                            <img [src]="domSan.bypassSecurityTrustResourceUrl(pic)" alt="{{user.name}}"
+                                style="max-width: 150px; max-height: 150px; border-radius: 1%;"
+                                triggers="mouseenter:mouseleave" placement="right">
+                        </a>
+                        <br>
+                        
+                    </div>
+                </div>
+                <ng-template class="modal fade" #content let-modal>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img class="img-responsive" [src]="domSan.bypassSecurityTrustResourceUrl(pic)"
+                                    alt="{{user.name}}" style="max-width: 400px; max-height: 400px;">
+                            </div>
+                        </div>
+                    </div>
+                   
+                </ng-template>
+            </div>
+        </header>
+        <br>
+        <div class="container-fluid">
+           
+
+            <div class="row" *ngIf="authService.isAuthenticated()">
+                <div class="col-sm-9" *ngFor="let notif of notifications;let i=index">
+                    <ngb-alert type="info">{{notif.senderName | titlecase}} want to make a video call with you.
+                        <a routerLink="/video-call/{{notif.code}}"
+                            (click)="onDeleteNotification(notif.id,i)"><strong>Click here. </strong></a>
+                        <a (click)="onDeleteNotification(notif.id,i)" style="cursor: pointer;"><strong>Delete</strong></a>
+                    </ngb-alert>
+                </div>
+            </div>
+
+            <div class="row" *ngIf="!deleteSearchedUser && authService.isAuthenticated()">
+                <div class="col-sm-10 ml-2">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        
+                                    {{seachedUser.name}}
+                                        
+                                    </div>
+                                    <div class="col-sm">
+                                        <button class="btn btn-primary btn-block" type="button" (click)="onVideoCall(seachedUser.userId)" *ngIf="(!isVideoCallAccepted)"
+                                            triggers="mouseenter:mouseleave" placement="right">
+                                            video_call
+                                        </button>
+                                        <button class="btn btn-primary btn-block" type="button" (click)="onMessage(seachedUser.userId)"
+                                            triggers="mouseenter:mouseleave" placement="right">
+                                            message
+                                        </button>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <video-call [userType]="userType" [caller]="caller" (callback)="CallBack($event)" *ngIf="isVideoCallAccepted">Loading</video-call>
+                                    </div>
+                                </div>
+                                {{seachedUser.email}}<br>
+                </div>
+            </div>
+        </div>
     </div>
-    
+   
+
     <div class="right">
         <app-sidebar-two></app-sidebar-two>
-    </div>    
+    </div>
 </div>

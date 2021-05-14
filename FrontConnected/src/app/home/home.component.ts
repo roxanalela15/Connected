@@ -16,11 +16,11 @@ export class HomeComponent implements OnInit {
     private router: Router,private activedRoute: ActivatedRoute,
     private authenticationService: AuthenticationService
 ) {
-  this.currentUser = JSON.parse(localStorage.getItem(this.SESSION_KEY));
+  this.currentUser = JSON.parse(sessionStorage.getItem(this.SESSION_KEY));
 }
 
   ngOnInit(): void {
-    console.log('currentUser from home', this.authenticationService.getLoggedinUser());
+   // console.log('currentUser from home', this.authenticationService.getLoggedinUser());
     this.activedRoute.queryParams.subscribe(
       (params) => {
         this.action = params['action'];

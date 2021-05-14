@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup,FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormGroup,FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ConfirmedValidator } from '../confirmed.validator';
 import { User } from '../models/user';
@@ -17,86 +17,145 @@ import { ClientService } from '../services/client-service';
 })
 export class RegisterComponent implements OnInit { //, OnDestroy
 
-  registerForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error = '';
-  imgURL:any;
-  private selectedFile;
+//   registerForm: FormGroup;
+//   loading = false;
+//   submitted = false;
+//   returnUrl: string;
+//   error = '';
+//   imgURL:any;
+//   private selectedFile;
 
-  saveSubscription : Subscription;
+//   saveSubscription : Subscription;
 
-  @Input()
-  user: User;
+//   @Input()
+//   user: User;
 
-  constructor(private httpClient: HttpClient,private http: ClientService,
-     private readonly router: Router,
-     private formBuilder: FormBuilder,
-) { }
+//   constructor(private httpClient: HttpClient,private authService: AuthenticationService,
+//      private readonly router: Router,
+//      private formBuilder: FormBuilder,
+// ) { }
 
-  ngOnInit() {
-    //this.createForm();
-    console.log(this.user);
+//   ngOnInit() {
+//     //this.createForm();
+//     console.log(this.user);
 
-    this.registerForm = this.formBuilder.group({
-      userId: [''],
-      photo: [''],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      passwordconfirm: ['', [Validators.required]],
-      email: ['', Validators.required],
-      role:['']
-  },
-  {
-    validator: ConfirmedValidator('password', 'passwordconfirm')
- });
- console.log(this.user);
+//     this.registerForm = this.formBuilder.group({
+//       userId: [''],
+//       photo: [''],
+//       name: ['', Validators.required],
+//       password: ['', [Validators.required, Validators.minLength(6)]],
+//       passwordconfirm: ['', [Validators.required]],
+//       email: ['', Validators.required],
+//       role:['']
+//   },
+//   {
+//     validator: ConfirmedValidator('password', 'passwordconfirm')
+//  });
+//  console.log(this.user);
 
-  }
+//   }
 
-  public onFileChanged(event){
-    console.log(event);
+//   public onFileChanged(event){
+//     console.log(event);
 
-    this.selectedFile = event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload=(event2)=>{
-      this.imgURL = reader.result;
-    }
-  }
+//     this.selectedFile = event.target.files[0];
+//     let reader = new FileReader();
+//     reader.readAsDataURL(event.target.files[0]);
+//     reader.onload=(event2)=>{
+//       this.imgURL = reader.result;
+//     }
+//   }
 
-  onSave() {
-    console.log(this.user);
-    const uploadData = new FormData();
-    uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
-    this.selectedFile.imageName = this.selectedFile.name;
-    this.httpClient.post('http://localhost:8080/api/user/upload', uploadData, { observe: 'response' })
-      .subscribe((response) => {
-      if (response.status === 200) {
-        this.submitted = true;
-        if (this.registerForm.invalid) {
-          return;
-        }
-        else{
-          this.loading = true;
-          this.http.registerUser(this.registerForm.value).subscribe(
-            (user) => {
-            console.log(this.user);
-            this.router.navigate(['']);
-          });
-        }
-        console.log('Image uploaded successfully');
+//   onSave() {
+//     console.log(this.user);
 
-      }else {
-        console.log('Image not uploaded successfully');
-      }
 
-      });
-    }
-  
-    get f() { return this.registerForm.controls; }
+//     // const uploadData = new FormData();
+//     // uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
+//     // this.selectedFile.imageName = this.selectedFile.name;
     
+//     // this.httpClient.post('http://localhost:8080/upload', uploadData, { observe: 'response' })
+//     //   .subscribe((response) => {
+//     //   if (response.status === 200) {
+//     //     this.submitted = true;
+//     //     if (this.registerForm.invalid) {
+//     //       return;
+//     //     }
+//     //     else{
+//     //       this.loading = true;
+//     //       // this.http.registerUser(this.registerForm.value).subscribe(
+//     //       //   (user) => {
+//     //       //   console.log(this.user);
+//     //       //   this.router.navigate(['']);
+//     //       // });
+//     //       this.authService.register(this.registerForm.value).subscribe(
+//     //                   (user) => {
+//     //         console.log(this.user);
+//     //         this.router.navigate(['']);
+//     //       });
+        
+//     //     }
+//     //     console.log('Image uploaded successfully');
+
+//     //   }else {
+//     //     console.log('Image not uploaded successfully');
+//     //   }
+
+//     //   });
+//     }
+  
+//     get f() { return this.registerForm.controls; }
+user: User;
+
+
+registerForm: FormGroup;
+submitted = false;
+constructor(private authService: AuthenticationService,
+            private router: Router, private route: ActivatedRoute,private formBuilder: FormBuilder,) { }
+
+ngOnInit(): void {
+  console.log('inside init');
+  this.initForm();
+  
+}
+initForm() {
+
+     this.registerForm = this.formBuilder.group({
+      name: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      passwordconfirm: new FormControl('', [Validators.required]),
+        },
+        {
+          validator: ConfirmedValidator('password', 'passwordconfirm')
+       });
+  
+}
+
+onSave() {
+  this.submitted = true;
+  console.log('inside submit');
+  if (this.registerForm.valid) {
+    this.authService.register(this.registerForm.value).subscribe(
+                            (result) => {
+                  console.log(this.user);
+                  
+      
+      this.user = result;
+      alert('Thank you ' + this.user.name + ' for registering. Now you can Login');
+      this.router.navigateByUrl('/');
+                });
+    
+    //this.resetForm();
+    //alert('Thank You for registering');
+  }
+  else {
+    return;
+  }
+}
+
+
+// convenience getter for easy access to form fields
+get f() { return this.registerForm.controls; }
 
 }

@@ -1,0 +1,25 @@
+#start {
+  margin:auto;
+  padding-left: 40%;
+  padding-top: 10%;
+}
+
+#self-view-container{
+  position: absolute;
+    left: 700px;
+    display: block;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+.container div {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid black;
+}

@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand navbar-light bg-light">
+  
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  
+    <ul class="nav navbar-nav my-2 my-lg-0">
+      <form class="form-inline my-2 my-lg-0" *ngIf = "auth.isAuthenticated()">
+        <div ngbDropdown class="d-inline-block">
+          <input class="form-control mr-sm-2" id="search" (keyup)="search($event.target.value)" 
+                placeholder="Search User" aria-label="Search"
+                ngbDropdownToggle>
+          <div ngbDropdownMenu aria-labelledby="search">
+            <ul *ngFor="let u of users$ | async">
+              <li ngbDropdownItem style="cursor: pointer;" (click) ="clicked(u)">
+                <i>{{u.name}}</i><br>
+                <i>{{u.email}}</i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+    </ul>
+  </div>
+</nav>
+<br>

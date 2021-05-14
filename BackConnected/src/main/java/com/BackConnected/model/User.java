@@ -10,18 +10,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
-@Table(name = "User",
+@Table(name = "User_new",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "email")
         })
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Long userId;
-    @Column(name = "firstName")
-    private String firstName;
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "name")
+    private String name;
     @Column(name = "email")
     private String email;
     @Column(name = "password")
@@ -30,8 +29,8 @@ public class User implements UserDetails {
     private String role;
     @Column(name = "picByte", length = 100000)
     private byte[] picByte;
-    @Column(name = "connected", nullable = false)
-    private Boolean connected = false;
+    //@Column(name = "connected", nullable = false)
+    //private Boolean connected = false;
 
     public byte[] getPicByte() {
         return picByte;
@@ -45,17 +44,11 @@ public class User implements UserDetails {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
     public void setEmail(String email) {
         this.email = email;
@@ -69,13 +62,13 @@ public class User implements UserDetails {
     }
     public void setPassword(String password) { this.password = password; }
 
-    public Boolean getConnected() {
-        return connected;
-    }
+    //public Boolean getConnected() {
+        //return connected;
+    //}
 
-    public void setConnected(Boolean connected) {
-        this.connected = connected;
-    }
+    //public void setConnected(Boolean connected) {
+        //this.connected = connected;
+    //}
 
     @JsonIgnore
     @Override

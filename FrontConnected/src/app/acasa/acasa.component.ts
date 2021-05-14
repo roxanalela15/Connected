@@ -31,13 +31,13 @@ export class AcasaComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.email = sessionStorage.getItem( 'auth_user' );
+      this.email = sessionStorage.getItem( 'email' );
       console.log("User logat = ",this.email);
       if ( this.email == null || this.email === '' ) {
           this.router.navigate( ['/'] );
       } else {
         //this.authService.getLoggedinUser();
-        this.authService.authenticate(this.email, this.password);
+        //this.authService.authenticate(this.email, this.password);
       }
       console.log("sunt aici inint");
       //this.onReceiverChange(event);
@@ -57,6 +57,10 @@ export class AcasaComponent implements OnInit {
 
 
   logout() {
+    localStorage.removeItem('name');
+    localStorage.removeItem('email');
+    localStorage.removeItem('id');
+    
     this.authService.logout();
 		this.router.navigateByUrl('');
       //this.userService.logout({'id': null, 'email': this.email});

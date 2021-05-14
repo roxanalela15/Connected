@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +31,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { PickerModule, SearchComponent } from '@ctrl/ngx-emoji-mart';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -43,6 +43,13 @@ import { AcasaComponent } from './acasa/acasa.component';
 import { UtilizatoriComponent } from './utilizatori/utilizatori.component';
 import { MesajeComponent } from './mesaje/mesaje.component';
 import { ChatService } from './services/chat.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthGuard } from './services/auth-guard.service';
+import { HomePageService } from './services/home-page.service';
+import { SearchService } from './services/search.service';
+import { HeaderComponent } from './header/header.component';
+import { VideoCallComponent } from './video-call/video-call.component';
+import { VideoCallService } from './services/video-call.service';
 
 
 @NgModule({
@@ -60,6 +67,8 @@ import { ChatService } from './services/chat.service';
     AcasaComponent,
     UtilizatoriComponent,
     MesajeComponent,
+    HeaderComponent,
+    VideoCallComponent,
     
 
   ],
@@ -90,6 +99,7 @@ import { ChatService } from './services/chat.service';
     MatTabsModule,
     MatSidenavModule,
     MatTooltipModule,
+    NgbModule,
     //MatRippleModule,
      //MatRadioModule,
      //MatGridListModule,
@@ -99,12 +109,13 @@ import { ChatService } from './services/chat.service';
      //SocialLoginModule
   ],
 
-  providers: [AuthenticationService, ClientService, ConversationService, ChatService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
-      multi: true
-    }
+  providers: [AuthGuard,AuthenticationService, ClientService, ConversationService, ChatService,HomePageService,SearchService,VideoCallService,
+   
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: AuthInterceptorService,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })
