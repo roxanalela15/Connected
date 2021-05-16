@@ -1,11 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/services/authentication.service';
-//import { UtilizatorService } from '@app/services/utilizator.service';
-import { AuthService } from 'angular4-social-login';
-import { StompService } from 'ng2-stomp-service';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-acasa',
@@ -32,6 +28,7 @@ export class AcasaComponent implements OnInit {
 
   ngOnInit() {
       this.email = sessionStorage.getItem( 'email' );
+      //localStorage.removeItem('receiverc');
       console.log("User logat = ",this.email);
       if ( this.email == null || this.email === '' ) {
           this.router.navigate( ['/'] );
@@ -50,7 +47,16 @@ export class AcasaComponent implements OnInit {
 
   onReceiverChange(event) {
     console.log("sunt aici receiver");
+     // var ccurent = localStorage.getItem('receiverc');
+      //console.log(ccurent);
       this.receiver = event;
+      console.log(event);
+      console.log("this receiver change",this.receiver);
+      // if (this.receiver != ccurent){
+      //   localStorage.removeItem('receiverc');
+        
+      // }
+      sessionStorage.setItem('receiverc',this.receiver);
       console.log("receiveeeeer", this.receiver);
   }
   
@@ -63,25 +69,9 @@ export class AcasaComponent implements OnInit {
     
     this.authService.logout();
 		this.router.navigateByUrl('');
-      //this.userService.logout({'id': null, 'email': this.email});
-      // .subscribe(
-      //     res => {
-      //         this.logoutSocial();
-      //     },
-      //     error => {
-      //         console.log(error._body);
-      //     });
+     
   }
 
-  // logoutSocial() {
-  //     this.authService.logout();
-  // }
-
-  /*clearSession() {
-      sessionStorage.removeItem( 'auth_user' );
-      this.stompService.disconnect();
-      this.email = null;
-      this.router.navigate( ['/'] );
-  }*/
+ 
 
 }

@@ -13,10 +13,6 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
       private http: HttpClient
     ) { }  
   
-    
-    registerUser(user: User) {
-        return this.http.post<User>('http://localhost:8080/api/user/register', user);
-      }
  
     getUsers() {
       return this.http.get<User[]>('http://localhost:8080/api/people');

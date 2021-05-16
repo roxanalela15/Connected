@@ -39,6 +39,7 @@ export class VideoCallComponent implements OnInit {
 
   @ViewChild('video1', { static: true }) video1: ElementRef<HTMLVideoElement>;
   @ViewChild('video2', { static: true }) video2: ElementRef<HTMLVideoElement>;
+  @ViewChild('screen1', { static: true }) screen1: ElementRef<HTMLVideoElement>;
   code: any;
   peerConnection: any;
   cameraActivated: boolean = true;

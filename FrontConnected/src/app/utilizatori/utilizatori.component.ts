@@ -35,7 +35,7 @@ export class UtilizatoriComponent implements OnInit {
 
     constructor(private userService: AuthenticationService,
             private channelService: ConversationService, private snackBar: MatSnackBar
-           ,private chatService: ChatService , private messageService: MessageService) {
+           ,private chatService: ChatService) {
                 // stompService.configure({
                 //     host: 'http://localhost/8080/sockjs-node',
                 //     queue: {'init': false}
@@ -44,6 +44,7 @@ export class UtilizatoriComponent implements OnInit {
     }
 
     ngOnInit() {
+
         this.userService.findUsers().subscribe(
             res =>  {
                 console.log("REs",res);
@@ -58,7 +59,7 @@ export class UtilizatoriComponent implements OnInit {
     @HostListener('window:focus', [])
     sendReadReceipt() {
         if (this.channel != null && this.receiver != null) {
-            this.messageService.sendReadReceipt(this.channel, this.receiver);
+            this.chatService.sendReadReceipt(this.channel, this.receiver);
         }
     }
 
@@ -68,7 +69,7 @@ export class UtilizatoriComponent implements OnInit {
         this.receiver = user.email;
         this.highlightedUsers = this.highlightedUsers.filter(u => u !== user.email);
         this.receiverUpdated.emit(user.email);
-        this.messageService.sendReadReceipt(channelId, user.email);
+        this.chatService.sendReadReceipt(channelId, user.email);
     }
 
     getOtherUsers(): Array<User> {
@@ -157,13 +158,13 @@ export class UtilizatoriComponent implements OnInit {
     subscribeToOtherUser(otherUser): string {
         const channelId = ConversationService.createChannel(this.email, otherUser.email);
         this.stompClient.subscribe('/channel/chat/' + channelId, res => {
-            this.messageService.pushMessage(res);
+            this.chatService.addMessage(res);
 
             if (res.channel !== this.channel) {
                 this.showNotification(res);
             } else {
                 // send read receipt for the channel
-                this.messageService.sendReadReceipt(this.channel, otherUser.email);
+                this.chatService.sendReadReceipt(this.channel, otherUser.email);
             }
         });
 

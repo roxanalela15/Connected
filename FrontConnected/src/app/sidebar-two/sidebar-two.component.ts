@@ -22,6 +22,6 @@ export class SidebarTwoComponent implements OnInit {
   }
   logout() {
 		this.authenticationService.logout();
-		this.router.navigateByUrl('');
+		this.router.navigateByUrl('api/auth/signin');
 	}
 }

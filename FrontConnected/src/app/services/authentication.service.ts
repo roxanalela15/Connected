@@ -9,59 +9,11 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class AuthenticationService {
 
-	// SESSION_KEY = 'auth_user'
-
-	// email: String;
-	// password: String;
-
-	// constructor(private http: HttpClient) {}
-
-	// authenticate(email: String, password: String) {
-	// 	return this.http.post('http://localhost:8080/login', { 
-	// 		headers: { authorization: this.createBasicAuthToken(email, password) }}).pipe(map((res) => {
-	// 			this.email = email;
-	// 			this.password = password;				
-	// 			this.registerInSession(email, password);
-	// 	}));
-	// }
-
-	// createBasicAuthToken(email: String, password: String) {
-	// 	return 'Basic ' + window.btoa(email + ":" + password)
-	// }
-	
-	// registerInSession(email, password) {
-	// 	sessionStorage.setItem(this.SESSION_KEY, email)
-	// }
-
-	// logout() {
-	// 	sessionStorage.removeItem(this.SESSION_KEY);
-	// 	this.email = null;
-	// 	this.password = null;
-	// }
-
-	// isUserLoggedin() {
-	// 	let user = sessionStorage.getItem(this.SESSION_KEY)
-		
-	// 	if (user === null) return false
-	// 	return true
-	// }
-
-	// getLoggedinUser() {
-	// 	let user = sessionStorage.getItem(this.SESSION_KEY)
-	// 	console.log("currentuser from service ",user);
-	// 	if (user === null) return ''
-	// 	return user
-	// }
-
-	// findUsers() {
-    //     return this.http.get('http://localhost:8080/listUsers');
-    // }
-	userData;
+  userData;
   userUrl: string;
   todoUrl: string;
   constructor(private http: HttpClient) {
-    this.userUrl = 'http://localhost:8080';
-    this.todoUrl = 'http://localhost:8080/todo';
+    this.userUrl = 'http://localhost:8080/api/auth';
   }
   private token: string = sessionStorage.getItem('token');
   error :string = 'false';
@@ -76,13 +28,13 @@ export class AuthenticationService {
   }
 
   login(form): Observable<User>{
-    return this.http.post<User>(this.userUrl + '/login', form).pipe(
+    return this.http.post<User>(this.userUrl + '/signin', form).pipe(
       catchError(this.handleLoginError)
     );
   }
 
   register(form): Observable<User>{
-    return this.http.post<User>(this.userUrl + '/register', form).pipe(
+    return this.http.post<User>(this.userUrl + '/signup', form).pipe(
       catchError(this.handleRegisterError)
     );
   }

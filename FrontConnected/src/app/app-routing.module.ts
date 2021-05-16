@@ -12,14 +12,14 @@ import { UtilizatoriComponent } from './utilizatori/utilizatori.component';
 import { VideoCallComponent } from './video-call/video-call.component';
 //import { SigninComponent } from './signin/signin.component';
 const routes: Routes = [
-  {path:'api/user/register',component:RegisterComponent},
-  //{path:'api/user/login',component:LoginComponent},
-  {path:'api/home',component:HomeComponent},
+  {path:'api/auth/signup',component:RegisterComponent},
+  {path:'',component:LoginComponent},
+  //{path:'api/home',component:HomeComponent},
   {path:'api/people',component:PeopleComponent},
   {path:'api/user-profile',component:UserProfileComponent},
   {path:'api/settings',component:SettingsComponent},
   {path:'api/calendar',component:CalendarComponent},
-  { path: '', component: LoginComponent },
+  { path: 'api/auth/signin', component: LoginComponent },
   {path: 'home',component:AcasaComponent},
   
   {path: 'video-call/:id', component: VideoCallComponent}

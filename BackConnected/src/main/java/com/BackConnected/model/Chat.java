@@ -1,13 +1,14 @@
 package com.BackConnected.model;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "mesaj")
-public class Mesaj {
+@Table(name = "chat3")
+public class Chat {
 
     @JsonIgnore
     @Id
@@ -21,6 +22,9 @@ public class Mesaj {
     @Column(name = "sender")
     private String sender;
 
+    @Column(name = "receiver")
+    private String receiver;
+
     @Column(name = "content")
     private String content;
 
@@ -32,14 +36,15 @@ public class Mesaj {
     @Column(name = "read_date")
     private Date readDate;
 
-    public Mesaj() {
+    public Chat() {
         super();
     }
 
-    public Mesaj(String channel, String sender, String content, Date timestamp) {
+    public Chat(String channel, String sender,String receiver, String content, Date timestamp) {
         super();
         this.channel = channel;
         this.sender = sender;
+        this.receiver = receiver;
         this.content = content;
         this.timestamp = timestamp;
     }
@@ -68,6 +73,14 @@ public class Mesaj {
         this.sender = sender;
     }
 
+    public String getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
+    }
+
     public String getContent() {
         return content;
     }
@@ -92,3 +105,4 @@ public class Mesaj {
         this.readDate = readDate;
     }
 }
+

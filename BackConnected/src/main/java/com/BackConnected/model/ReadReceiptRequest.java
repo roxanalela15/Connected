@@ -3,7 +3,8 @@ package com.BackConnected.model;
 public class ReadReceiptRequest {
 
     private String channel;
-    private String email;
+    private String emails;
+    private String emailr;
 
     public ReadReceiptRequest() {
         super();
@@ -14,11 +15,17 @@ public class ReadReceiptRequest {
     public void setChannel(String channel) {
         this.channel = channel;
     }
-    public String getEmail() {
-        return email;
+    public String getEmailS() {
+        return emails;
     }
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailS(String email) {
+        this.emails = email;
+    }
+    public String getEmailR() {
+        return emailr;
+    }
+    public void setEmailR(String email) {
+        this.emailr = email;
     }
 
 

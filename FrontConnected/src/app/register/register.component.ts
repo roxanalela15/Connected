@@ -15,96 +15,8 @@ import { ClientService } from '../services/client-service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit { //, OnDestroy
+export class RegisterComponent implements OnInit {
 
-//   registerForm: FormGroup;
-//   loading = false;
-//   submitted = false;
-//   returnUrl: string;
-//   error = '';
-//   imgURL:any;
-//   private selectedFile;
-
-//   saveSubscription : Subscription;
-
-//   @Input()
-//   user: User;
-
-//   constructor(private httpClient: HttpClient,private authService: AuthenticationService,
-//      private readonly router: Router,
-//      private formBuilder: FormBuilder,
-// ) { }
-
-//   ngOnInit() {
-//     //this.createForm();
-//     console.log(this.user);
-
-//     this.registerForm = this.formBuilder.group({
-//       userId: [''],
-//       photo: [''],
-//       name: ['', Validators.required],
-//       password: ['', [Validators.required, Validators.minLength(6)]],
-//       passwordconfirm: ['', [Validators.required]],
-//       email: ['', Validators.required],
-//       role:['']
-//   },
-//   {
-//     validator: ConfirmedValidator('password', 'passwordconfirm')
-//  });
-//  console.log(this.user);
-
-//   }
-
-//   public onFileChanged(event){
-//     console.log(event);
-
-//     this.selectedFile = event.target.files[0];
-//     let reader = new FileReader();
-//     reader.readAsDataURL(event.target.files[0]);
-//     reader.onload=(event2)=>{
-//       this.imgURL = reader.result;
-//     }
-//   }
-
-//   onSave() {
-//     console.log(this.user);
-
-
-//     // const uploadData = new FormData();
-//     // uploadData.append('imageFile', this.selectedFile, this.selectedFile.name);
-//     // this.selectedFile.imageName = this.selectedFile.name;
-    
-//     // this.httpClient.post('http://localhost:8080/upload', uploadData, { observe: 'response' })
-//     //   .subscribe((response) => {
-//     //   if (response.status === 200) {
-//     //     this.submitted = true;
-//     //     if (this.registerForm.invalid) {
-//     //       return;
-//     //     }
-//     //     else{
-//     //       this.loading = true;
-//     //       // this.http.registerUser(this.registerForm.value).subscribe(
-//     //       //   (user) => {
-//     //       //   console.log(this.user);
-//     //       //   this.router.navigate(['']);
-//     //       // });
-//     //       this.authService.register(this.registerForm.value).subscribe(
-//     //                   (user) => {
-//     //         console.log(this.user);
-//     //         this.router.navigate(['']);
-//     //       });
-        
-//     //     }
-//     //     console.log('Image uploaded successfully');
-
-//     //   }else {
-//     //     console.log('Image not uploaded successfully');
-//     //   }
-
-//     //   });
-//     }
-  
-//     get f() { return this.registerForm.controls; }
 user: User;
 
 
@@ -155,7 +67,7 @@ onSave() {
 }
 
 
-// convenience getter for easy access to form fields
+
 get f() { return this.registerForm.controls; }
 
 }

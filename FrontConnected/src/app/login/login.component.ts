@@ -15,49 +15,6 @@ import { Subject } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-	
-	// email: string = '';
-	// password : string = '';
-
-	// isLoggedin = false;
-	// message: string;
-	// error: string;
-
-	// constructor(private router: Router, private authenticationService: AuthenticationService) {}
-
-	// ngOnInit() {
-	// 	this.isLoggedin = this.authenticationService.isUserLoggedin();
-
-	// 	if(this.isLoggedin) {
-	// 		this.router.navigateByUrl('/api/user-profile');
-	// 	}
-	// }
-
-	// login() {
-	// 	if(this.email !== '' && this.email !== null && this.password !== '' && this.password !== null) {
-	// 		// this.authenticationService.authenticate(this.email, this.password).subscribe((result)=> {
-	// 		// 	console.log(result);
-	// 		// 	sessionStorage.setItem('user', this.email);
-	// 		// 	this.router.navigate(['/acasa']);
-	// 		// }, () => {		  
-	// 		// 	this.error = 'Error';
-	// 		// });
-	// 		this.authenticationService.authenticate(this.email, this.password)
-    //     .subscribe(
-    //         res => {
-    //             //sessionStorage.setItem('auth_user', this.email);
-	// 			sessionStorage.setItem('name', this.user.name);
-	// 			sessionStorage.setItem('email', this.user.email);
-	// 			sessionStorage.setItem('id', this.user.id);
-    //             this.router.navigate(['/api/user-profile']);
-    //         },
-    //         error => {
-    //             this.message = error._body;
-    //         });
-	// 	} else {
-	// 		this.error = 'Invalid Credentials';
-	// 	}
-	// }
 	user: User;
   submitted = false;
   userChanged = new Subject<User>();
@@ -119,8 +76,7 @@ export class LoginComponent implements OnInit {
   openVerticallyCentered(content) {
     this.modalService.open(content, { centered: true, size: 'lg', });
   }
-
-  // convenience getter for easy access to form fields
+  
   get f() { return this.formgroup.controls; }
 
 }

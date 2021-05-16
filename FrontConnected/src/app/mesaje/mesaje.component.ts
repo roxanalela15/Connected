@@ -39,14 +39,20 @@ export class MesajeComponent implements OnInit {
   @Input()
   email: string;
 
+  //@Input()
+  selectedemail: string;
+
     constructor(private fb: FormBuilder, private fileService: FileService,private chatService: ChatService
             , private channelService: ConversationService) { }
 
     ngOnInit() {
       this.email = sessionStorage.getItem('email');
-      console.log("mesaj,, curent user",this.email);
+      
       this.channelService.getChannel().subscribe(channel => {
           this.channel = channel;
+          this.selectedemail = sessionStorage.getItem('receiverc');
+      console.log("receiver from message",this.selectedemail);
+      console.log("mesaj,, curent user",this.email);
           console.log("filtrez mesaje");
           this.filterMessages();
           console.log(this.filterMessages());
@@ -73,11 +79,13 @@ export class MesajeComponent implements OnInit {
       this.showEmojiPicker = false;
     }
     sendMessage(newmsg:string) {
+      
       console.log(newmsg);
       let obj: Message = {
         channel: this.channel,
         content:newmsg,
         sender: this.email,
+        receiver: this.selectedemail,
         timestamp: this.timestamp
       };
   
