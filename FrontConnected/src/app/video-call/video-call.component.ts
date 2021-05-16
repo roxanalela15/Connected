@@ -8,27 +8,7 @@ const MESSAGE_TYPE = {
   SDP: 'SDP',
   CANDIDATE: 'CANDIDATE',
 };
-/**
-Step 1: caller creates offer
 
-Step 2: caller sets localDescription
-
-Step 3: caller sends the description to the callee
-
-//------------------------------------------------------//
-
-Step 4: callee receives the offer sets remote description
-
-Step 5: callee creates answer
-
-Step 6: callee sets local description
-
-Step 7: callee send the description to caller
-
-//------------------------------------------------------//
-
-Step 8: caller receives the answer and sets remote description
- */
 
 @Component({
   selector: 'app-video-call',
@@ -40,6 +20,7 @@ export class VideoCallComponent implements OnInit {
   @ViewChild('video1', { static: true }) video1: ElementRef<HTMLVideoElement>;
   @ViewChild('video2', { static: true }) video2: ElementRef<HTMLVideoElement>;
   @ViewChild('screen1', { static: true }) screen1: ElementRef<HTMLVideoElement>;
+  @ViewChild('screen2', { static: true }) screen2: ElementRef<HTMLVideoElement>;
   code: any;
   peerConnection: any;
   cameraActivated: boolean = true;
@@ -65,77 +46,11 @@ export class VideoCallComponent implements OnInit {
     document.getElementById('start-button').addEventListener('click', async event => {
       if (this.code) {
         this.startChat();
-        
         this.connected = true;
       }
     });
   }
 
-  // async sharecamera(){
-  //   console.log("sunt aci3");
-  //   const mediaDevices = navigator.mediaDevices as any;
-  //   try {
-  //     this.userMediaStream = await mediaDevices.getUserMedia({ audio: true, video: true });
-  //     // if(this.screenActivated){
-  //     //   this.cameraActivated = false;
-  //     //   this.captureStream = await mediaDevices.getDisplayMedia({ video: true })
-  //     // }
-      
-  //     this.showChatRoom();
-      
-  //     this.signaling = new WebSocket('ws://127.0.0.1:1337');
-      
-  //     this.peerConnection = this.createPeerConnection();
-      
-  //     this.addMessageHandler();
-
-  //     this.userMediaStream.getTracks().forEach(track => this.senders.push(this.peerConnection.addTrack(track, this.userMediaStream)));
-  //    // this.captureStream.getTracks().forEach(track2 => this.senders.push(this.peerConnection.addTrack(track2, this.captureStream)));
-      
-  //     //if (this.cameraActivated){
-  //       this.video1.nativeElement.srcObject = this.userMediaStream;
-  //       //this.videoscreen.nativeElement.srcObject = this.captureStream;
-  //     //}
-      
-  //   }
-  //   catch (err) {
-  //     console.error(err);
-  //   }
-
-  // }
-
-  // async sharescreen(){
-  //   console.log("sunt aci3");
-  //   const mediaDevices = navigator.mediaDevices as any;
-  //   try {
-  //     this.userMediaStream = await mediaDevices.getDisplayMedia({ video: true })
-  //     // if(this.screenActivated){
-  //     //   this.cameraActivated = false;
-  //     //   this.captureStream = await mediaDevices.getDisplayMedia({ video: true })
-  //     // }
-      
-  //     this.showChatRoom();
-      
-  //     this.signaling = new WebSocket('ws://127.0.0.1:1337');
-      
-  //     this.peerConnection = this.createPeerConnection();
-      
-  //     this.addMessageHandler();
-
-  //     this.userMediaStream.getTracks().forEach(track => this.senders.push(this.peerConnection.addTrack(track, this.userMediaStream)));
-  //    // this.captureStream.getTracks().forEach(track2 => this.senders.push(this.peerConnection.addTrack(track2, this.captureStream)));
-      
-  //     //if (this.cameraActivated){
-  //       this.video1.nativeElement.srcObject = this.userMediaStream;
-  //       //this.videoscreen.nativeElement.srcObject = this.captureStream;
-  //     //}
-      
-  //   }
-  //   catch (err) {
-  //     console.error(err);
-  //   }
-
-  // }
 
   async startChat() {
     console.log("sunt aci3");
@@ -194,9 +109,10 @@ export class VideoCallComponent implements OnInit {
       }
     };
 
+    
+
     pc.ontrack = (event) => {
       console.log("video");
-      // tslint:disable-next-line:variable-name
       const _video2 = this.video2.nativeElement;
       console.log(_video2);
       _video2.srcObject = event.streams[0];
@@ -204,6 +120,7 @@ export class VideoCallComponent implements OnInit {
 
     return pc;
   }
+
   
 
   addMessageHandler() {
@@ -295,27 +212,9 @@ export class VideoCallComponent implements OnInit {
   }
 
   
-
-  // screenShare(): void {
-  //   this.screenActivated = true;
-  //   console.log(this.screenActivated);
-  //   const mediaDevices = navigator.mediaDevices as any;
-  //   this.captureStream = mediaDevices.getDisplayMedia({ video: true });
-    
-  //   //this.userMediaStream.getTracks().forEach(track => this.senders.push(this.peerConnection.addTrack(track, this.userMediaStream)));
-   
-  //   setTimeout(() => {
-  //     console.log("nstive");
-  //     this.videoscreen.nativeElement.srcObject = this.captureStream;
-  //   }, 5000);
-    
-    
-  //   //this.shareScreen();
-  // }
   screenShare() {
+    this.screenActivated = true;
     const mediaDevices = navigator.mediaDevices as any;
-    
-    
     mediaDevices.getDisplayMedia({video: true})
       .then(this.handleSuccess, this.handleError);
     }
@@ -345,6 +244,8 @@ export class VideoCallComponent implements OnInit {
         console.error(error);
       }
     }
+
+ 
  
   
 }
