@@ -48,6 +48,7 @@ export class UserProfileComponent implements OnInit {
 	  if (this.authService.isAuthenticated()) {
 		this.searchService.searchedUser.subscribe(u => {
 		  this.seachedUser = u;
+		  localStorage.setItem('searcheduser',this.seachedUser.name);
 		  this.deleteSearchedUser = false;
 		});
   
@@ -147,7 +148,8 @@ export class UserProfileComponent implements OnInit {
 	  this.router.navigateByUrl('/video-call/' + code);
 	}
   
-	onDeleteNotification(id, i){
+	onDeleteNotification(id,sendername, i){
+	 localStorage.setItem("notifUser",sendername);
 	  this.notifications.splice(i, 1);
 	  this.notif$.next(this.notifications);
 	  this.notif$.subscribe(nl => this.notifications = nl);

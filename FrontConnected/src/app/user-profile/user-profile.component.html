@@ -58,8 +58,8 @@
                 <div class="col-sm-9" *ngFor="let notif of notifications;let i=index">
                     <ngb-alert type="info">{{notif.senderName | titlecase}} want to make a video call with you.
                         <a routerLink="/video-call/{{notif.code}}"
-                            (click)="onDeleteNotification(notif.id,i)"><strong>Click here. </strong></a>
-                        <a (click)="onDeleteNotification(notif.id,i)" style="cursor: pointer;"><strong>Delete</strong></a>
+                            (click)="onDeleteNotification(notif.id,notif.senderName,i)"><strong>Click here. </strong></a>
+                        <a (click)="onDeleteNotification(notif.id,notif.senderName,i)" style="cursor: pointer;"><strong>Delete</strong></a>
                     </ngb-alert>
                 </div>
             </div>

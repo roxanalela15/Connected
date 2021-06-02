@@ -4,15 +4,22 @@
   padding-top: 10%;
 }
 
-#self-view-container{
+/* #self-view-container{
   position: absolute;
     left: 700px;
     display: block;
+    overflow: hidden;
 }
-.wrapper {
+#remote-view-container{
+  position: absolute;
+    left: 700px;
+    display: block;
+    overflow: hidden;
+} */
+/* .wrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-}
+} */
 
 .container {
   display: flex;
@@ -22,4 +29,26 @@
   width: 100%;
   padding: 5px;
   border: 1px solid black;
+}
+
+.split {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}
+
+.wrapper:after {
+  content: "";
+  display: table;
+  clear: both;
 }

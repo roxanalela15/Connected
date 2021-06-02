@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbModal, NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
+
 const MESSAGE_TYPE = {
   SDP: 'SDP',
   CANDIDATE: 'CANDIDATE',
@@ -19,24 +20,34 @@ export class VideoCallComponent implements OnInit {
 
   @ViewChild('video1', { static: true }) video1: ElementRef<HTMLVideoElement>;
   @ViewChild('video2', { static: true }) video2: ElementRef<HTMLVideoElement>;
-  @ViewChild('screen1', { static: true }) screen1: ElementRef<HTMLVideoElement>;
-  @ViewChild('screen2', { static: true }) screen2: ElementRef<HTMLVideoElement>;
   code: any;
   peerConnection: any;
+
   cameraActivated: boolean = true;
   screenActivated: boolean = false;
+
   signaling: any;
   senders: any = [];
   userMediaStream: any;
+
   captureStream:any;
+  
   displayMediaStream: any;
   disabled: boolean = true;
   codeInput: string;
   connected: boolean = false;
   startButton = document.getElementById('startButton');
+
+  selfuser: string;
+  remoteuser:string;
+  sharing:Boolean = false;
   
   constructor(private route: ActivatedRoute, private modealService: NgbModal) { }
   ngOnInit() {
+    this.selfuser = sessionStorage.getItem('name');
+    console.log(this.selfuser);
+    this.remoteuser = localStorage.getItem('notifUser');
+    console.log(this.remoteuser);
     console.log("sunt aci");
     if (this.route.snapshot.params.id !== ''){
       console.log("sunt aci2");
@@ -174,7 +185,6 @@ export class VideoCallComponent implements OnInit {
   }
 
   sendMessage(message) {
-    //const that = this;
     
     if (this.code) {
       
@@ -211,41 +221,39 @@ export class VideoCallComponent implements OnInit {
     this.modealService.open(content);
   }
 
+    screenShare(): void {
+      this.shareScreen();
+    }
   
-  screenShare() {
-    this.screenActivated = true;
-    const mediaDevices = navigator.mediaDevices as any;
-    mediaDevices.getDisplayMedia({video: true})
-      .then(this.handleSuccess, this.handleError);
-    }
-
-    handleSuccess(stream) {
-      const video = document.querySelector('video');
-      video.setAttribute('height', '640');
-      video.setAttribute('width', '480');
-      video.srcObject = stream;
-      
-      // stop share
-      stream.getVideoTracks()[0].addEventListener('ended', (error) => {
-        this.errorMsg('The user has ended sharing the screen', error);
-        
+    private shareScreen(): void {
+      this.sharing = true;
+      // @ts-ignore
+      navigator.mediaDevices.getDisplayMedia({
+        video: {
+          cursor: 'always'
+        },
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true
+        }
+      }).then(stream => {
+        const videoTrack = stream.getVideoTracks()[0];
+        videoTrack.onended = () => {
+          this.stopScreenShare();
+        };
+  
+        const sender = this.peerConnection.getSenders().find(s => s.track.kind === videoTrack.kind);
+        sender.replaceTrack(videoTrack);
+      }).catch(err => {
+        console.log('Unable to get display media ' + err);
       });
-     // this.video1.nativeElement.srcObject = stream;
     }
-    
-    handleError(error) {
-      this.errorMsg(`getDisplayMedia error: ${error.name}`, error);
-    }
-    
-    errorMsg(msg, error) {
-      const errorElement = document.querySelector('#errorMsg');
-      errorElement.innerHTML += `<p>${msg}</p>`;
-      if (typeof error !== 'undefined') {
-        console.error(error);
-      }
-    }
-
  
- 
+    private stopScreenShare(): void {
+      this.sharing = false;
+      const videoTrack = this.userMediaStream.getVideoTracks()[0];
+      const sender = this.peerConnection.getSenders().find(s => s.track.kind === videoTrack.kind);
+      sender.replaceTrack(videoTrack);
+    }
   
 }
