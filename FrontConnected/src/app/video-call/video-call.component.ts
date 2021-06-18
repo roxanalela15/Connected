@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { VideoCallService } from '@app/services/video-call.service';
 import { NgbModal, NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -42,7 +43,7 @@ export class VideoCallComponent implements OnInit {
   remoteuser:string;
   sharing:Boolean = false;
   
-  constructor(private route: ActivatedRoute, private modealService: NgbModal) { }
+  constructor(private route: ActivatedRoute, private modealService: NgbModal, private videocallservice: VideoCallService) { }
   ngOnInit() {
     this.selfuser = sessionStorage.getItem('name');
     console.log(this.selfuser);
@@ -75,7 +76,7 @@ export class VideoCallComponent implements OnInit {
       
       this.showChatRoom();
       
-      this.signaling = new WebSocket('ws://127.0.0.1:1337');
+      this.signaling = new WebSocket('ws://192.168.100.37:1337');
       
       this.peerConnection = this.createPeerConnection();
       
@@ -256,4 +257,10 @@ export class VideoCallComponent implements OnInit {
       sender.replaceTrack(videoTrack);
     }
   
+    requestControl(){
+
+    }
+    setControl(){
+     return this.videocallservice.setControl();
+    }
 }

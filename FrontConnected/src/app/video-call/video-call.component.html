@@ -22,8 +22,10 @@
   <div class="footer">
     <button *ngIf="connected" class="btn btn-outline-danger ml-4 mt-2" id="startButton" (click)="screenShare()">Screen share</button>
       <div id="errorMsg"></div>
-    <button *ngIf="connected" class="btn btn-outline-danger ml-4 mt-2" id="stop" (click)="requestControl();" type="button"
-      style="margin-left: 450px;" routerLink="/home"> Request control</button>
+    <button *ngIf="connected" class="btn btn-outline-danger ml-4 mt-2"  (click)="requestControl()" type="button"
+      style="margin-left: 450px;"> Request control</button>
+      <button *ngIf="connected" class="btn btn-outline-danger ml-4 mt-2"  (click)="setControl()" type="button"
+      style="margin-left: 450px;"> setcontrol</button>
     <button *ngIf="connected" class="btn btn-outline-danger ml-4 mt-2" id="stop" (click)="endCall();" type="button"
       style="margin-left: 450px;" routerLink="/home"> End Call</button>
   </div>
@@ -35,4 +37,5 @@
     <button class="btn btn-outline-primary" id="start-button" [disabled]="codeInput.length < 9">
       Start Video Chat</button>
   </div>
+  
 </div>
