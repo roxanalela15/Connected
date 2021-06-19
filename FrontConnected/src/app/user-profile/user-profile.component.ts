@@ -156,14 +156,10 @@ export class UserProfileComponent implements OnInit {
 	  this.homeService.deleteNotification(id).subscribe();
 	}
   
-	openWindowCustomClass(content) {
-	  this.modalService.open(content, { windowClass: 'dark-modal' });
-	}
-	open(content) {
-	  this.modalService.open(content);
-	}
-  
+	
 	onDeleteSearchedUser(){
 	  this.deleteSearchedUser = true;
 	}
+
+	
 }

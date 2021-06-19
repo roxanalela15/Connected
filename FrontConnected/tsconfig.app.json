@@ -8,7 +8,7 @@
   "files": [
     "src/main.ts",
     "src/polyfills.ts",
-    "C:/Users/roxan/connected_incercareonetoone/Connected/FrontConnected/node_modules/ng2-stomp-service/dist/stomp.service.ts"
+    "C:/Users/roxan/Connected/FrontConnected/node_modules/ng2-stomp-service/dist/stomp.service.ts"
   ],
   "include": [
     "src/**/*.d.ts"

@@ -4,5 +4,4 @@ export class Message {
     receiver: string;
     content: string;
     timestamp?: Date;
-    readDate?: Date;
 }

@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "chat3")
+@Table(name = "chat_table")
 public class Chat {
 
     @JsonIgnore
@@ -31,10 +31,6 @@ public class Chat {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "timestamp")
     private Date timestamp;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "read_date")
-    private Date readDate;
 
     public Chat() {
         super();
@@ -97,12 +93,5 @@ public class Chat {
         this.timestamp = timestamp;
     }
 
-    public Date getReadDate() {
-        return readDate;
-    }
-
-    public void setReadDate(Date readDate) {
-        this.readDate = readDate;
-    }
 }
 

@@ -52,7 +52,7 @@ export class MesajeComponent implements OnInit {
           this.channel = channel;
           this.selectedemail = sessionStorage.getItem('receiverc');
       console.log("receiver from message",this.selectedemail);
-      console.log("mesaj,, curent user",this.email);
+      console.log("sender from message",this.email);
           console.log("filtrez mesaje");
           this.filterMessages();
           console.log(this.filterMessages());

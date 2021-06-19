@@ -1,7 +1,6 @@
 package com.BackConnected.controller;
 
 import com.BackConnected.model.Chat;
-import com.BackConnected.model.ReadReceiptRequest;
 import com.BackConnected.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -36,8 +35,5 @@ public class ChatController {
         return chatService.findAllByChannel(channelId);
     }
 
-    @PostMapping(value = "/messages")
-    public void sendReadReceipt(@RequestBody ReadReceiptRequest request) {
-        chatService.sendReadReceipt(request.getChannel(), request.getEmailS(), request.getEmailR());
-    }
+
 }

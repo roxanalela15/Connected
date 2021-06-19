@@ -17,11 +17,7 @@ public class ChatServiceImpl implements ChatService {
         return chatRepository.findAllByChannel(channel);
     }
 
-    @Override
-    public void sendReadReceipt(String channel, String emails, String emailr){
-        chatRepository.sendReadReceipt(channel,emails,emailr);
-    }
-
+    
     @Override
     public Chat save(Chat message){
         return chatRepository.save(message);

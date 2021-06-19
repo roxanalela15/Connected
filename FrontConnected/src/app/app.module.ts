@@ -16,7 +16,6 @@ import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from './services/client-service';
 import { AuthenticationService } from './services/authentication.service';
-import { AuthInterceptorService } from './services/authinterceptor';
 import { SidebarOneComponent } from './sidebar-one/sidebar-one.component';
 import { SidebarTwoComponent } from './sidebar-two/sidebar-two.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';

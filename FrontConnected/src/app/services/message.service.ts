@@ -32,12 +32,7 @@ filterMessages(channel: string): Array<Message> {
       });
 }
 
-sendReadReceipt(channelId: string, email: string) {
-  this.http.post('http://192.168.100.37:8080/messages/', {
-      channel: channelId,
-      email: email
-  });
-}
+
 
 getMessages(): Observable<any> {
   console.log("Mesajeeele=",this.msgs);

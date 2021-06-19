@@ -1,11 +1,9 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Message } from '@app/models/message';
 import { User } from '@app/models/user';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { ChatService } from '@app/services/chat.service';
 import { ConversationService } from '@app/services/conversation.service';
-import { MessageService } from '@app/services/message.service';
 
 import * as SockJS from 'sockjs-client';
 declare var SockJS;
@@ -36,10 +34,7 @@ export class UtilizatoriComponent implements OnInit {
     constructor(private userService: AuthenticationService,
             private channelService: ConversationService, private snackBar: MatSnackBar
            ,private chatService: ChatService) {
-                // stompService.configure({
-                //     host: 'http://localhost/8080/sockjs-node',
-                //     queue: {'init': false}
-                // });
+            
 
     }
 
@@ -56,12 +51,6 @@ export class UtilizatoriComponent implements OnInit {
         this.channelService.getChannel().subscribe(channel => this.channel = channel);
     }
 
-    @HostListener('window:focus', [])
-    sendReadReceipt() {
-        if (this.channel != null && this.receiver != null) {
-            this.chatService.sendReadReceipt(this.channel, this.receiver);
-        }
-    }
 
     startChatWithUser(user) {
         const channelId = ConversationService.createChannel(this.email, user.email);
@@ -69,7 +58,6 @@ export class UtilizatoriComponent implements OnInit {
         this.receiver = user.email;
         this.highlightedUsers = this.highlightedUsers.filter(u => u !== user.email);
         this.receiverUpdated.emit(user.email);
-        this.chatService.sendReadReceipt(channelId, user.email);
     }
 
     getOtherUsers(): Array<User> {
@@ -158,26 +146,12 @@ export class UtilizatoriComponent implements OnInit {
         this.stompClient.subscribe('/channel/chat/' + channelId, res => {
             this.chatService.addMessage(res);
 
-            if (res.channel !== this.channel) {
-                this.showNotification(res);
-            } else {
-                
-                this.chatService.sendReadReceipt(this.channel, otherUser.email);
-            }
+            
         });
 
         return channelId;
     }
 
-    showNotification(message: Message) {
-        const snackBarRef = this.snackBar.open('New message from ' + message.sender, 'Show', {duration: 3000});
-        this.highlightedUsers.push(message.sender);
-        snackBarRef.onAction().subscribe(() => {
-            this.receiver = message.sender;
-            this.receiverUpdated.emit(message.sender);
-            this.channel = ConversationService.createChannel(this.email, message.sender);
-            this.channelService.refreshChannel(this.channel);
-          });
-    }
+    
 
 }
