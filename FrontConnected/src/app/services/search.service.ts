@@ -5,8 +5,7 @@ import { User } from '../models/user';
 import { map } from 'rxjs/operators';
 
 function createHttpOptions(packageName: string, refresh = false) {
-  // npm package name search api
-  // e.g., http://npmsearch.com/query?q=dom'
+
   const params = new HttpParams({ fromObject: { q: packageName } });
   const headerMap = refresh ? { 'x-refresh': 'true' } : {};
   const headers = new HttpHeaders(headerMap);

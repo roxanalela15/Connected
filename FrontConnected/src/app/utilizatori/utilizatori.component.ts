@@ -112,9 +112,7 @@ export class UtilizatoriComponent implements OnInit {
     const ws = new SockJS(serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
-    /**
-     * Connect stomp client and subscribe asynchronously to the chat message-handling Controller endpoint and push any message body into the messages array
-     */
+   
     this.stompClient.connect({}, function(frame) {
         that.stompClient.subscribe('/channel/login', res => {
             console.log("REEEEEES",res);
@@ -163,7 +161,7 @@ export class UtilizatoriComponent implements OnInit {
             if (res.channel !== this.channel) {
                 this.showNotification(res);
             } else {
-                // send read receipt for the channel
+                
                 this.chatService.sendReadReceipt(this.channel, otherUser.email);
             }
         });
