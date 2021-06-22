@@ -15,12 +15,7 @@
   }
 
   
- .right {
-    width: 5%;
-    height:700px;
-    float: right;
-    padding: 10px;
-  }
+
 
   .row{
     display: flex;

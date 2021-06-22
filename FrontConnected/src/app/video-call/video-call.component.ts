@@ -76,7 +76,7 @@ export class VideoCallComponent implements OnInit {
       
       this.showChatRoom();
       
-      this.signaling = new WebSocket('ws://localhost:1337');
+      this.signaling = new WebSocket('ws://192.168.100.37:1337');
       
       this.peerConnection = this.createPeerConnection();
       
@@ -262,5 +262,6 @@ export class VideoCallComponent implements OnInit {
     }
     setControl(){
      return this.videocallservice.setControl();
+  
     }
 }

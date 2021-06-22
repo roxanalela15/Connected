@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@app/services/authentication.service';
 
 @Component({
   selector: 'app-sidebar-one',
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SidebarOneComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
@@ -18,8 +19,9 @@ export class SidebarOneComponent implements OnInit {
   openProfile() {
     this.router.navigate(['api/user-profile']); 
   }
-  openPeople() {
-    this.router.navigate(['api/people']); 
-  }
+  logout() {
+		this.authenticationService.logout();
+		this.router.navigateByUrl('api/auth/signin');
+	}
 
 }

@@ -34,19 +34,6 @@ export class HomeComponent implements OnInit {
   openProfile() {
     this.router.navigate(['api/home'], { queryParams: { action: 'user-profile' } }); 
   }
-  openPeople() {
-    this.router.navigate(['api/home'], { queryParams: { action: 'people' } }); 
-  }
-
-  openCalendar() {
-    this.router.navigate(['api/home'], { queryParams: { action: 'calendar' } }); 
-  }
-  openNotes() {
-    this.router.navigate(['api/home'], { queryParams: { action: 'notes' } }); 
-  }
-  openSettings() {
-    this.router.navigate(['api/home'], { queryParams: { action: 'settings' } }); 
-  }
   logout() {
 		this.authenticationService.logout();
 		this.router.navigateByUrl('/api/user/login');

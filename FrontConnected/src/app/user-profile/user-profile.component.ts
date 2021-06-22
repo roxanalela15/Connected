@@ -122,7 +122,7 @@ export class UserProfileComponent implements OnInit {
 	  }
 	}
 	getImage(){
-	  this.http.get('http://localhost:8080/get/' + this.user.userId)
+	  this.http.get('http://192.168.100.37:8080/get/' + this.user.userId)
 	  .subscribe(
 		res => {
 		  this.retrieveResonse = res;

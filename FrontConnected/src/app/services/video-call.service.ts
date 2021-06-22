@@ -12,6 +12,6 @@ export class VideoCallService {
 
    setControl(){
      console.log("pressed");
-    return this.http.get<String>('http://localhost:8080/videocall/setremote');
+    return this.http.get<String>('http://192.168.100.37:8080/videocall/setremote');
   }
 }

@@ -15,20 +15,20 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
   
  
     getUsers() {
-      return this.http.get<User[]>('http://localhost:8080/api/people');
+      return this.http.get<User[]>('http://192.168.100.37:8080/api/people');
       //return this.http.get<User[]>('http://localhost:8080/listUsers');
     }
 
     sendMessage(message:Message){
-      return this.http.post<Message>('http://localhost:8080/api/messages', message);
+      return this.http.post<Message>('http://192.168.100.37:8080/api/messages', message);
     }
 
     seeMessage(){
-      return this.http.get<Message[]>('http://localhost:8080/api/messages');
+      return this.http.get<Message[]>('http://192.168.100.37:8080/api/messages');
     }
     getDetails(email) :Observable<User>{
       console.log("am ajuns aici");
-      return this.http.get<User>('http://localhost:8080/api/settings/'+email);
+      return this.http.get<User>('http://192.168.100.37:8080/api/settings/'+email);
     }
   
     }

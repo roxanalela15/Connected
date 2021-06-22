@@ -37,25 +37,14 @@ export class AcasaComponent implements OnInit {
         //this.authService.authenticate(this.email, this.password);
       }
       console.log("sunt aici inint");
-      //this.onReceiverChange(event);
   }
   
-  // @HostListener('window:unload', ['$event'])
-  // onUnload() {
-  //     this.logout();
-  // }
-
   onReceiverChange(event) {
     console.log("sunt aici receiver");
-     // var ccurent = localStorage.getItem('receiverc');
-      //console.log(ccurent);
       this.receiver = event;
       console.log(event);
       console.log("this receiver change",this.receiver);
-      // if (this.receiver != ccurent){
-      //   localStorage.removeItem('receiverc');
-        
-      // }
+     
       sessionStorage.setItem('receiverc',this.receiver);
       console.log("receiveeeeer", this.receiver);
   }

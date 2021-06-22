@@ -20,7 +20,7 @@ export class ChatService {
   initializeWebSocketConnection() {
     
      
-    const serverUrl = 'http://localhost:8080/chat-websocket';
+    const serverUrl = 'http://192.168.100.37:8080/chat-websocket';
     const ws = new SockJS(serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;

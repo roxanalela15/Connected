@@ -4,23 +4,6 @@
   padding-top: 10%;
 }
 
-/* #self-view-container{
-  position: absolute;
-    left: 700px;
-    display: block;
-    overflow: hidden;
-}
-#remote-view-container{
-  position: absolute;
-    left: 700px;
-    display: block;
-    overflow: hidden;
-} */
-/* .wrapper {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-} */
-
 .container {
   display: flex;
   justify-content: space-between;

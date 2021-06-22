@@ -57,9 +57,6 @@ onSave() {
       alert('Thank you ' + this.user.name + ' for registering. Now you can Login');
       this.router.navigateByUrl('/');
                 });
-    
-    //this.resetForm();
-    //alert('Thank You for registering');
   }
   else {
     return;

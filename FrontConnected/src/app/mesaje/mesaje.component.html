@@ -22,8 +22,5 @@
   </button>
   <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"
     title="Pick your emoji…"></emoji-mart>
-  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <input type="file" (change)="onFileChange($event)" />
-    <input type="submit" [disabled]="formGroup.invalid" value="upload" />
-  </form>
+  
 </div>

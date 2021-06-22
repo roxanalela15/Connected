@@ -75,22 +75,12 @@
 	  padding: 10px;
 	}
   
-	
-   .right {
-	  width: 5%;
-	  height:700px;
-	  float: right;
-	  padding: 10px;
-	}
   
 	.row{
 	  display: flex;
 	  flex-direction: row;
 	}
 	
-
-	/* nn */
-
 	.column {
 		float: left;
 		width: 50%;
@@ -99,18 +89,10 @@
 	  }
 	  .lefte {
 		width: 25%;
-		/* overflow:scroll;
-		overflow-x: hidden; */
-	  }
-	  
-	  .righte {
-		width: 70%;
-		/* overflow:scroll;
-		overflow-x: hidden; */
+	
 	  }
 	  
 	  
-	  /* Clear floats after the columns */
 	  .rowe:after {
 		content: "";
 		display: table;

@@ -6,8 +6,6 @@ import { User } from '@app/models/user';
 import { AuthenticationService } from '@app/services/authentication.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
-//import { UtilizatorService } from '@app/services/utilizator.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -50,23 +48,18 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('email', this.user.email);
           sessionStorage.setItem('id', this.user.userId.toString());
          
-          // this.retrieveRes = result;
-          // //console.log(this.retrieveRes.picByte);
-          // this.retrievedImage = `data:image/(png|jpg|jpeg);base64,${this.retrieveRes.picByte}`;
-          // //console.log(this.retrievedImage);
-          // localStorage.setItem('pic', this.retrievedImage);
+          
           this.authService.toggleToken();
           sessionStorage.setItem('token', this.authService.getToken());
           console.log(sessionStorage.getItem('token'));
           this.resetForm();
-          this.router.navigate(['/home'], { relativeTo: this.route });
+          this.router.navigate(['/api/user-profile'], { relativeTo: this.route });
         }
-        //this.authService.recieveUserData(this.user);
+        
       });
     }
     else {
       return;
-     // alert('Fill required detail!');
     }
   }
 

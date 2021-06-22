@@ -24,7 +24,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://192.168.100.37:4200")
 @Component
 public class UserController {
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);

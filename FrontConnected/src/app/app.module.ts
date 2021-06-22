@@ -8,16 +8,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { PeopleComponent } from './people/people.component';
 import { HomeComponent } from './home/home.component';
-import { SettingsComponent } from './settings/settings.component';
-import { CalendarComponent } from './calendar/calendar.component';
 import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ClientService } from './services/client-service';
 import { AuthenticationService } from './services/authentication.service';
 import { SidebarOneComponent } from './sidebar-one/sidebar-one.component';
-import { SidebarTwoComponent } from './sidebar-two/sidebar-two.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IconsModule } from './icons/icons.module';
@@ -57,12 +53,8 @@ import { VideoCallService } from './services/video-call.service';
     LoginComponent,
     RegisterComponent,
     UserProfileComponent,
-    PeopleComponent,
     HomeComponent,
-    SettingsComponent,
-    CalendarComponent,
     SidebarOneComponent,
-    SidebarTwoComponent,
     AcasaComponent,
     UtilizatoriComponent,
     MesajeComponent,
