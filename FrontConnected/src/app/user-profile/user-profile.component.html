@@ -2,10 +2,12 @@
 <div class="row">
     
     <div class="sidenav">
-        <a (click)="openProfile()">User</a>
-        <a (click)="openMessages()">Messages</a>
-        <a (click)="logout()">Logout</a>
-    </div>
+		<ul id="menu">
+		<a (click)="openProfile();"><li class="material-icons">home</li></a>
+        <a (click)="openMessages();"><li class="material-icons">sms</li></a>
+        <a (click)="logout();"><li class="material-icons">logout</li></a>
+	</ul>
+	</div>
     <div class="content">
         <app-header></app-header>
         <hr>
@@ -62,7 +64,7 @@
                 <div class="col-sm-9" *ngFor="let notif of notifications;let i=index">
                     <ngb-alert type="info">{{notif.senderName | titlecase}} invited you in a video-call.
                         <a routerLink="/video-call/{{notif.code}}"
-                            (click)="onDeleteNotification(notif.id,notif.senderName,i)"><strong>Join </strong></a>
+                            (click)="onDeleteNotification(notif.id,notif.senderName,i)" style="cursor: pointer;"><strong>Join </strong></a>
                         <a (click)="onDeleteNotification(notif.id,notif.senderName,i)" style="cursor: pointer;"><strong>Delete</strong></a>
                     </ngb-alert>
                 </div>

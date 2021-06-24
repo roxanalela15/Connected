@@ -102,5 +102,9 @@ export class MesajeComponent implements OnInit {
     toggleEmojiPicker() {
       this.showEmojiPicker = !this.showEmojiPicker;
     }
+
+
+
+    
   
 }

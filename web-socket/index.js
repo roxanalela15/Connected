@@ -1,14 +1,15 @@
 const http = require('http');
 const server = require('websocket').server;
 
+//create server
 const httpServer = http.createServer(() => { });
-httpServer.listen(1337, () => {
-  console.log('Server listening at port 1337');
-});
 
+//init server
 const wsServer = new server({
   httpServer,
 });
+
+//
 
 const peersByCode = {};
 
@@ -31,38 +32,13 @@ wsServer.on('request', request => {
       peer.connection.send(message.utf8Data);
     }
   });
-  connection.on("join-message", (roomId) => {
-    connection.join(roomId);
-    console.log("User joined in a room : " + roomId);
-  })
-
-  connection.on("screen-data", function (data) {
-    data = JSON.parse(data);
-    var room = data.room;
-    var imgStr = data.image;
-    connection.broadcast.to(room).emit('screen-data', imgStr);
-  })
-
-  connection.on("mouse-move", function (data) {
-    var room = JSON.parse(data).room;
-    connection.broadcast.to(room).emit("mouse-move", data);
-  })
-
-  connection.on("mouse-click", function (data) {
-    var room = JSON.parse(data).room;
-    connection.broadcast.to(room).emit("mouse-click", data);
-  })
-
-  connection.on("type", function (data) {
-    var room = JSON.parse(data).room;
-    connection.broadcast.to(room).emit("type", data);
-  })
-  //connection.emit("join-message", room);
-  connection.on('screen-data', function (message) {
-          document.getElementById("imgid").setAttribute("src", "data:image/png;base64," + message);
-        })
+  
 });
 
 wsServer.on("close", request=>{
   console.log("Server done.");
 })
+
+httpServer.listen(1337, () => {
+  console.log('Server listening at port 1337');
+});

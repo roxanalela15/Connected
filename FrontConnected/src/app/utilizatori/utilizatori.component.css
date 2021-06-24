@@ -1,11 +1,13 @@
 .user-item {
 	box-shadow: inset 0 0 5px rgba(80,80,80, 0.2);
+	color:black;
 	cursor: pointer;
 	background: rgba(80,80,80, 0.2);
 }
 
 .current-chat-user {
-	background: rgba(170,170,170, 0.2);
+	background: #3f5058;
+	color:white
 }
 
 .new-user {
@@ -18,4 +20,8 @@
 
 .disconnected-user {
 	opacity: 0.4;
+}
+
+button:hover{
+    background-color: #6f90a1;
 }

@@ -70,11 +70,7 @@ export class VideoCallComponent implements OnInit {
     const mediaDevices = navigator.mediaDevices as any;
     try {
       this.userMediaStream = await mediaDevices.getUserMedia({ audio: true, video: true });
-      // if(this.screenActivated){
-      //   this.cameraActivated = false;
-      //   this.captureStream = await mediaDevices.getDisplayMedia({ video: true })
-      // }
-      
+     
       this.showChatRoom();
       
       this.signaling = new WebSocket('ws://localhost:1337');
@@ -84,12 +80,8 @@ export class VideoCallComponent implements OnInit {
       this.addMessageHandler();
 
       this.userMediaStream.getTracks().forEach(track => this.senders.push(this.peerConnection.addTrack(track, this.userMediaStream)));
-     // this.captureStream.getTracks().forEach(track2 => this.senders.push(this.peerConnection.addTrack(track2, this.captureStream)));
       
-      //if (this.cameraActivated){
         this.video1.nativeElement.srcObject = this.userMediaStream;
-        //this.videoscreen.nativeElement.srcObject = this.captureStream;
-      //}
       
     }
     catch (err) {
@@ -211,9 +203,7 @@ export class VideoCallComponent implements OnInit {
     this.userMediaStream.getTracks().forEach( (track) => {
       track.stop();
     });
-    // this.captureStream.getTracks().forEach( (track2) => {
-    //   track2.stop();
-    // });
+    
     this.video1.nativeElement.srcObject = null;
     this.video2.nativeElement.srcObject = null;
     //this.videoscreen.nativeElement.srcObject = null;

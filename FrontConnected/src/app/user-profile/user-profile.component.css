@@ -34,12 +34,13 @@
 
     .sidenav {
       height: 100%;
-      width: 160px;
+      width: 120px;
       position: fixed;
       z-index: 1;
       top: 0;
       left: 0;
-      background-color: #3c3f58;
+      right:0;
+      /* background-color: #3f5058; */
       overflow-x: hidden;
       padding-top: 20px;
     }
@@ -48,7 +49,7 @@
       padding: 6px 8px 6px 16px;
       text-decoration: none;
       font-size: 25px;
-      color: #818181;
+      color: #f1f1f1;
       display: block;
     }
     
@@ -58,7 +59,8 @@
     
     .content{
       background-color: #f1f1f1;
-      margin-left: 180px; 
+      margin-left: 160px; 
+      opacity: 0.8;
       /* font-size: 28px;  */
       padding: 0px 10px;
       border: 1px solid grey;
@@ -84,4 +86,39 @@
       .personaldata {
         font-size: 20px;
         padding-left: 20px;
+      }
+
+      button:hover{
+        background-color: #6f90a1;
+    }
+
+    .material-icons {
+      color: #fff;
+      font-size: 32px;
+      display: block;
+    }
+    
+    ul .material-icons:hover {
+      opacity: 0.5;
+    }
+
+    ul {
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      height: 280px;
+      width: 5%;
+      padding: 0;
+      text-align: center;
+       }
+      
+      #menu .material-icons {
+      margin: 20px 0;
+      transition: all .5s ease-out !important;
+      -webkit-transition: all .5s ease-out;
+      -moz-transition: all .5s ease-out;
+      -o-transition: all .5s ease-out;
       }

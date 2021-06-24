@@ -34,3 +34,6 @@ button {
 	color: #d3d3d3;
 	font-size: 16px;
   }
+  button:hover{
+    background-color: #6f90a1;
+}
