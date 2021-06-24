@@ -15,6 +15,7 @@
 
 .message-container {
 	overflow-y: auto;
+	overflow-x: hidden;
 	height: 480px;
 }
 
@@ -27,7 +28,7 @@
 .input_msg_write input {
 	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
 	border: medium none;
-	color: #4c4c4c;
+	color: #584d4d;
 	font-size: 15px;
 	min-height: 48px;
 	width: 100%;
@@ -39,15 +40,27 @@
 }
 
 .msg_send_btn {
-	background: #05728f none repeat scroll 0 0;
+	
 	border: medium none;
 	border-radius: 50%;
-	color: #fff;
+	color: #584d4d;
+	
 	cursor: pointer;
 	font-size: 17px;
 	height: 33px;
 	position: absolute;
 	right: 0;
 	top: 11px;
-	width: 33px;
+	width: 44px;
+}
+.toggle-emoji{
+    padding: 10px;
+    border: 1px solid rgb(196, 196, 196);
+    background-size: cover;
+    display: inline-block;
+    height: 38px;
+    width: 38px;
+}
+.emoji-mart{
+    position: fixed
 }

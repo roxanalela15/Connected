@@ -16,6 +16,9 @@ export class MesajeComponent implements OnInit {
   channel: string;
   timestamp: Date;
   showEmojiPicker = false;
+  sheet = 'apple';
+  size = 22;
+  sheetSize = 64;
   sets = [
     'native',
     'google',
@@ -38,7 +41,10 @@ export class MesajeComponent implements OnInit {
 
   //@Input()
   selectedemail: string;
-
+  get backgroundImageFn(): (set: string, sheetSize: number) => string {
+    return (set: string, sheetSize: number) =>
+      `https://unpkg.com/emoji-datasource-${this.sheet}@4.0.4/img/${this.sheet}/sheets-256/${sheetSize}.png`;
+  }
     constructor(private fb: FormBuilder, private chatService: ChatService
             , private channelService: ConversationService) { }
 
@@ -96,5 +102,5 @@ export class MesajeComponent implements OnInit {
     toggleEmojiPicker() {
       this.showEmojiPicker = !this.showEmojiPicker;
     }
-
+  
 }

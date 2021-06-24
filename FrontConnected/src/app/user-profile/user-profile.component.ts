@@ -122,7 +122,7 @@ export class UserProfileComponent implements OnInit {
 	  }
 	}
 	getImage(){
-	  this.http.get('http://192.168.100.37:8080/get/' + this.user.userId)
+	  this.http.get('http://localhost:8080/get/' + this.user.userId)
 	  .subscribe(
 		res => {
 		  this.retrieveResonse = res;
@@ -161,5 +161,20 @@ export class UserProfileComponent implements OnInit {
 	  this.deleteSearchedUser = true;
 	}
 
+	logout() {
+		localStorage.removeItem('name');
+		localStorage.removeItem('email');
+		localStorage.removeItem('id');
+		
+		this.authService.logout();
+			this.router.navigateByUrl('api/auth/signin');
+		 
+	  }
 	
+	  openMessages() {
+		this.router.navigate(['home']); 
+	  }
+	  openProfile() {
+		this.router.navigate(['api/user-profile']); 
+	  }
 }

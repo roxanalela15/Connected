@@ -7,6 +7,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AcasaComponent } from './acasa/acasa.component';
 import { UtilizatoriComponent } from './utilizatori/utilizatori.component';
 import { VideoCallComponent } from './video-call/video-call.component';
+import { RemoteComponent } from './remote/remote.component';
 //import { SigninComponent } from './signin/signin.component';
 const routes: Routes = [
   {path:'api/auth/signup',component:RegisterComponent},
@@ -14,7 +15,8 @@ const routes: Routes = [
   {path:'api/user-profile',component:UserProfileComponent},
   {path: 'api/auth/signin', component: LoginComponent },
   {path: 'home',component:AcasaComponent},
-  {path: 'video-call/:id', component: VideoCallComponent}
+  {path: 'video-call/:id', component: VideoCallComponent},
+  {path: 'view', component: RemoteComponent},
 ];
 
 @NgModule({

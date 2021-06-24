@@ -20,11 +20,12 @@ export class SearchService {
   searchedUser = new Subject<User>();
   url: string;
   constructor(private http: HttpClient) { 
-    this.url = 'http://192.168.100.37:8080/users/';
+    this.url = 'http://localhost:8080/users/';
   }
 
   search(name: string): Observable<User[]>{
     if (!name.trim()){return of([]); }
+    
     const options = createHttpOptions(name, true);
     return this.http.get<User[]>(this.url + name, options).pipe(
     

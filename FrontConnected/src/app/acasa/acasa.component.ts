@@ -57,10 +57,20 @@ export class AcasaComponent implements OnInit {
     localStorage.removeItem('id');
     
     this.authService.logout();
-		this.router.navigateByUrl('');
+		this.router.navigateByUrl('api/auth/signin');
      
   }
 
+  openMessages() {
+    this.router.navigate(['home']); 
+  }
+  openProfile() {
+    this.router.navigate(['api/user-profile']); 
+  }
+  // openlogout() {
+	// 	this.authService.logout();
+	// 	this.router.navigateByUrl('api/auth/signin');
+	// }
  
 
 }

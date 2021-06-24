@@ -45,7 +45,8 @@ import { SearchService } from './services/search.service';
 import { HeaderComponent } from './header/header.component';
 import { VideoCallComponent } from './video-call/video-call.component';
 import { VideoCallService } from './services/video-call.service';
-
+import { RemoteComponent } from './remote/remote.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { VideoCallService } from './services/video-call.service';
     MesajeComponent,
     HeaderComponent,
     VideoCallComponent,
+    RemoteComponent,
     
 
   ],
@@ -74,6 +76,7 @@ import { VideoCallService } from './services/video-call.service';
     IconsModule,
     PickerModule,
     /** Material Modules */
+    FlexLayoutModule,
     MatButtonModule,
     MatListModule,
     MatIconModule,
@@ -91,22 +94,10 @@ import { VideoCallService } from './services/video-call.service';
     MatSidenavModule,
     MatTooltipModule,
     NgbModule,
-    //MatRippleModule,
-     //MatRadioModule,
-     //MatGridListModule,
-     //MatDatepickerModule,
-     //MatNativeDateModule,
-     //MatSliderModule
-     //SocialLoginModule
   ],
 
   providers: [AuthGuard,AuthenticationService, ClientService, ConversationService, ChatService,HomePageService,SearchService,VideoCallService,
-   
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptorService,
-    //   multi: true
-    // }
+
   ],
   bootstrap: [AppComponent]
 })

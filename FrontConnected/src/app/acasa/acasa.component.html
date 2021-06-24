@@ -1,17 +1,16 @@
 <div class="row">
-	<div class="left">
-		<app-sidebar-one></app-sidebar-one>
+	<div class="sidenav">
+		<a (click)="openProfile();">User</a>
+        <a (click)="openMessages();">Messages</a>
+        <a (click)="logout();">Logout</a>
+	
 	</div>
 
 	<div class="content">
-
-
 		<div class="rowe">
 			<div class="column lefte">
 				<div class="user-list-col wt-justify cell-border">
 					<app-utilizatori class="user-container" (receiverUpdated)="onReceiverChange($event)">
-
-
 					</app-utilizatori>
 				</div>
 				
@@ -20,6 +19,7 @@
 			</div>
 			<div class="column righte">
 				<div>
+					
 					<div *ngIf="receiver !== null && receiver !== undefined && receiver !== ''" class="receiver-header">
 						Talk to {{receiver}}</div>
 				</div>

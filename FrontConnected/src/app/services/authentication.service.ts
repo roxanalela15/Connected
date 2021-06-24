@@ -13,7 +13,7 @@ export class AuthenticationService {
   userUrl: string;
   todoUrl: string;
   constructor(private http: HttpClient) {
-    this.userUrl = 'http://192.168.100.37:8080/api/auth';
+    this.userUrl = 'http://localhost:8080/api/auth';
   }
   private token: string = sessionStorage.getItem('token');
   error :string = 'false';
@@ -48,7 +48,7 @@ export class AuthenticationService {
     this.userData = userData;
   }
 findUsers() {
-        return this.http.get('http://192.168.100.37:8080/listUsers');
+        return this.http.get('http://localhost:8080/listUsers');
     }
  
 

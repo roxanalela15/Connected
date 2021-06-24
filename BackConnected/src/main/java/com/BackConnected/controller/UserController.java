@@ -24,7 +24,7 @@ import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
 @RestController
-@CrossOrigin(origins = "http://192.168.100.37:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @Component
 public class UserController {
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -98,6 +98,9 @@ public class UserController {
     @GetMapping("/getUser/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") Long id){
         User user = (userService.findByUserId(id)).get();
+        if(user == this.user){
+            user = null;
+        }
         return new ResponseEntity<User>(user, HttpStatus.OK);
 
     }
@@ -145,6 +148,5 @@ public class UserController {
         //System.out.println("Am ajuns in server");
         return userService.findAll();
     }
-
 
 }

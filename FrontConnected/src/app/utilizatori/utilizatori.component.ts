@@ -96,7 +96,7 @@ export class UtilizatoriComponent implements OnInit {
         });
       }
     initUserEvents() {
-        const serverUrl = 'http://192.168.100.37:8080/chat-websocket';
+        const serverUrl = 'http://localhost:8080/chat-websocket';
     const ws = new SockJS(serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
@@ -116,15 +116,15 @@ export class UtilizatoriComponent implements OnInit {
                   this.subscribeToOtherUser(res);
               }
           });
-          that.stompClient.subscribe('/channel/logout', res => {
-            this.users = this.users.filter(item => item.email !== res.email);
-            this.users.push(res);
-            const channelId = ConversationService.createChannel(this.email, res.email);
-            if (this.channel === channelId) {
-                this.receiverUpdated.emit('');
-                this.channelService.removeChannel();
-            }
-        });
+        //   that.stompClient.subscribe('/channel/logout', res => {
+        //     this.users = this.users.filter(item => item.email !== res.email);
+        //     this.users.push(res);
+        //     const channelId = ConversationService.createChannel(this.email, res.email);
+        //     if (this.channel === channelId) {
+        //         this.receiverUpdated.emit('');
+        //         this.channelService.removeChannel();
+        //     }
+        // });
 
         that.subscribeToOtherUsers(this.users, this.email);
     });
@@ -153,5 +153,7 @@ export class UtilizatoriComponent implements OnInit {
     }
 
     
-
+// getSelectedUser(){
+    
+// }
 }

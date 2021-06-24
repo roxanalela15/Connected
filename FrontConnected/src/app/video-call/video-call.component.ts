@@ -54,6 +54,7 @@ export class VideoCallComponent implements OnInit {
       console.log("sunt aci2");
       this.code = this.route.snapshot.params.id;
       this.codeInput = this.code;
+      localStorage.setItem("codeInput",this.codeInput);
     }
     document.getElementById('start-button').addEventListener('click', async event => {
       if (this.code) {
@@ -76,7 +77,7 @@ export class VideoCallComponent implements OnInit {
       
       this.showChatRoom();
       
-      this.signaling = new WebSocket('ws://192.168.100.37:1337');
+      this.signaling = new WebSocket('ws://localhost:1337');
       
       this.peerConnection = this.createPeerConnection();
       
@@ -258,7 +259,7 @@ export class VideoCallComponent implements OnInit {
     }
   
     requestControl(){
-
+      window.open("localhost:4200/view", "_blank");
     }
     setControl(){
      return this.videocallservice.setControl();

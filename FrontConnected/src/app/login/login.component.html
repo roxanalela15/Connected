@@ -5,11 +5,14 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
+
+  
 <p></p>
+
 <div class="container">
 	<div class="card bg-light">
 		<article class="card-body mx-auto" style="max-width: 400px;">
-			<h4 class="card-title mt-3 text-center">Login</h4>
+			<h4 class="card-title mt-3 text-center">Sign In</h4>
 			<form method="POST" [formGroup]="formgroup" name="myForm" (ngSubmit)="login()">
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
@@ -26,25 +29,24 @@
 						<span class="input-group-text"> <i class="fa fa-key"></i> </span>
 					</div>
 					<input type="password" id="password" class="form-control input-sm"
-								placeholder="Enter User password."
-								[ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password"
-								required />
-							<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-								<div *ngIf="f.password.errors.required">Password is required</div>
+						placeholder="Enter User password." [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+						formControlName="password" required />
+					<div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+						<div *ngIf="f.password.errors.required">Password is required</div>
 
-							</div>
+					</div>
 				</div>
 
 				<div class="form-actions">
 					<button type="submit" class="btn btn-primary btn-block">
-						Login
+						Sign In
 					</button>
 				</div>
 
 				<p class="text-center">Don't have an account? <a routerLink="/api/auth/signup"
 						routerLinkActive="active">Sign Up</a> </p>
 			</form>
-			
+
 		</article>
 	</div>
 
