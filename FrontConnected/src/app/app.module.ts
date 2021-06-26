@@ -47,6 +47,10 @@ import { VideoCallComponent } from './video-call/video-call.component';
 import { VideoCallService } from './services/video-call.service';
 import { RemoteComponent } from './remote/remote.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
+// import * as $ from 'jquery';
+// import { ElectronService } from 'ngx-electron';
+
+
 
 @NgModule({
   declarations: [
@@ -96,7 +100,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     NgbModule,
   ],
 
-  providers: [AuthGuard,AuthenticationService, ClientService, ConversationService, ChatService,HomePageService,SearchService,VideoCallService,
+  providers: [AuthGuard,AuthenticationService, ClientService, ConversationService, ChatService,HomePageService,SearchService,VideoCallService
 
   ],
   bootstrap: [AppComponent]

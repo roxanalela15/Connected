@@ -4,10 +4,16 @@ const server = require('websocket').server;
 //create server
 const httpServer = http.createServer(() => { });
 
+
 //init server
 const wsServer = new server({
   httpServer,
 });
+
+// let http = require('http');
+// let server = http.Server(app);
+// let socketIO = require('socket.io');
+// let wsServer = socketIO(server);
 
 //
 
@@ -32,6 +38,22 @@ wsServer.on('request', request => {
       peer.connection.send(message.utf8Data);
     }
   });
+
+
+connection.on("mouse-move", function(data) {
+    var room = localStorage.getItem("codeInput");
+    connection.broadcast.to(room).emit("mouse-move", data);
+})
+
+connection.on("mouse-click", function(data) {
+    var room = localStorage.getItem("codeInput");
+    connection.broadcast.to(room).emit("mouse-click", data);
+})
+
+connection.on("type", function(data) {
+    var room = localStorage.getItem("codeInput");
+    connection.broadcast.to(room).emit("type", data);
+})
   
 });
 

@@ -4,6 +4,7 @@ import { Message } from '@app/models/message';
 import { ChatService } from '@app/services/chat.service';
 import { ConversationService } from '@app/services/conversation.service';
 
+
 @Component({
   selector: 'app-mesaje',
   templateUrl: './mesaje.component.html',
@@ -16,25 +17,16 @@ export class MesajeComponent implements OnInit {
   channel: string;
   timestamp: Date;
   showEmojiPicker = false;
+  public message: string="";
   sheet = 'apple';
   size = 22;
   sheetSize = 64;
-  sets = [
-    'native',
-    'google',
-    'twitter',
-    'facebook',
-    'emojione',
-    'apple',
-    'messenger'
-  ]
-  set = 'twitter';
+  
 
   public formGroup = this.fb.group({
     file: [null, Validators.required]
   });
  
-  private fileName;
 
   @Input()
   email: string;
@@ -50,7 +42,7 @@ export class MesajeComponent implements OnInit {
 
     ngOnInit() {
       this.email = sessionStorage.getItem('email');
-      
+      console.log(this.newMessage);
       this.channelService.getChannel().subscribe(channel => {
           this.channel = channel;
           this.selectedemail = sessionStorage.getItem('receiverc');
@@ -67,10 +59,9 @@ export class MesajeComponent implements OnInit {
     }
 
     addEmoji(event) {
-      const { newMessage } = this;
-      const text = `${newMessage}${event.emoji.native}`;
-
-      this.newMessage = text;
+      console.log(this.message);
+      const text = `${this.message}${event.emoji.native}`;
+      this.message = text;
       this.showEmojiPicker = false;
     }
     sendMessage(newmsg:string) {

@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { VideoCallService } from '@app/services/video-call.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
+// import { BrowserWindow } from 'electron';
 
-
+// import {ElectronService} from "ngx-electron";
 
 const MESSAGE_TYPE = {
   SDP: 'SDP',
   CANDIDATE: 'CANDIDATE',
 };
-
 
 @Component({
   selector: 'app-video-call',
@@ -23,14 +22,16 @@ export class VideoCallComponent implements OnInit {
   @ViewChild('video2', { static: true }) video2: ElementRef<HTMLVideoElement>;
   code: any;
   peerConnection: any;
-
+robot:any;
   cameraActivated: boolean = true;
+
+  
   screenActivated: boolean = false;
 
   signaling: any;
   senders: any = [];
   userMediaStream: any;
-
+  userconnected:Boolean=false;
   captureStream:any;
   
   displayMediaStream: any;
@@ -43,7 +44,13 @@ export class VideoCallComponent implements OnInit {
   remoteuser:string;
   sharing:Boolean = false;
   
-  constructor(private route: ActivatedRoute, private modealService: NgbModal, private videocallservice: VideoCallService) { }
+  constructor(private route: ActivatedRoute,private router: Router/*, private _electronService:ElectronService*/) {
+    //this._electronService = _electronService;
+    // console.log(this._electronService.remote);
+    // this.robot = this._electronService.remote.require("robotjs");
+ 
+   }
+
   ngOnInit() {
     this.selfuser = sessionStorage.getItem('name');
     console.log(this.selfuser);
@@ -62,6 +69,8 @@ export class VideoCallComponent implements OnInit {
         this.connected = true;
       }
     });
+
+   
   }
 
 
@@ -70,6 +79,7 @@ export class VideoCallComponent implements OnInit {
     const mediaDevices = navigator.mediaDevices as any;
     try {
       this.userMediaStream = await mediaDevices.getUserMedia({ audio: true, video: true });
+      this.userconnected = true;
      
       this.showChatRoom();
       
@@ -202,6 +212,8 @@ export class VideoCallComponent implements OnInit {
   async endCall(){
     this.userMediaStream.getTracks().forEach( (track) => {
       track.stop();
+      localStorage.removeItem("notifUser");
+      this.router.navigate(['/api/user-profile']);
     });
     
     this.video1.nativeElement.srcObject = null;
@@ -209,9 +221,9 @@ export class VideoCallComponent implements OnInit {
     //this.videoscreen.nativeElement.srcObject = null;
   }
 
-  open(content){
-    this.modealService.open(content);
-  }
+  // open(content){
+  //   this.modealService.open(content);
+  // }
 
     screenShare(): void {
       this.shareScreen();
@@ -239,6 +251,34 @@ export class VideoCallComponent implements OnInit {
       }).catch(err => {
         console.log('Unable to get display media ' + err);
       });
+   
+    //   var socket = this.signaling;
+    //   const win = new BrowserWindow({
+    //     width: 500,
+    //     height: 150,
+    //     webPreferences: {
+    //         nodeIntegration: true
+    //     }
+    // })
+    //   socket.on("mouse-move", function(data){
+    //     var obj = JSON.parse(data);
+    //     var x = obj.x;
+    //     var y = obj.y;
+
+    //     this.robot.moveMouse(x, y);
+    // })
+
+    // socket.on("mouse-click", function(data){
+    //     this.robot.mouseClick();
+    // })
+
+    // socket.on("type", function(data){
+    //     var obj = JSON.parse(data);
+    //     var key = obj.key;
+
+    //     this.robot.keyTap(key);
+    // })
+      
     }
  
     private stopScreenShare(): void {
@@ -249,10 +289,32 @@ export class VideoCallComponent implements OnInit {
     }
   
     requestControl(){
-      window.open("localhost:4200/view", "_blank");
+
+      //window.open("localhost:4200/view", "_blank");
+      var socket = this.signaling;
+      var room = localStorage.getItem("codeInput");
+      // const remoteview = document.getElementById('remote-view');
+      //       remoteview.addEventListener('mouse-move', (e:MouseEvent) =>{
+
+      //           var posX = $(this).offset().left;
+      //           var posY = $(this).offset().top;
+
+      //           var x = e.pageX - posX;
+      //           var y = e.pageY - posY;
+
+      //           var obj = {"x" : x, "y": y, "room": room}
+      //           socket.emit("mouse-move", JSON.stringify(obj));
+
+      //       })
+
+      //       remoteview.addEventListener('mouse-click', e=>{
+      //           var obj = {"room" : room};
+      //           socket.emit("mouse-click", JSON.stringify(obj));
+      //       })
+
+
     }
-    setControl(){
-     return this.videocallservice.setControl();
-  
-    }
-}
+    
+
+   
+  }
