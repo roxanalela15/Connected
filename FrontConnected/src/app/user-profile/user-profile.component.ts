@@ -11,6 +11,8 @@ import { SearchService } from '@app/services/search.service';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { Notification } from '../models/notification.model';
+import {ElectronService } from 'ngx-electron';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -19,12 +21,12 @@ import { Notification } from '../models/notification.model';
 })
 export class UserProfileComponent implements OnInit {
 
-	
+	robot = this._electronService.remote.require('robotjs');
 	formgroup: FormGroup;
 	constructor(public authService: AuthenticationService, private searchService: SearchService,
 				private http: HttpClient, private homeService: HomePageService,
 				public domSan: DomSanitizer, private modalService: NgbModal,
-				private router: Router, private route: ActivatedRoute) {
+				private router: Router, private route: ActivatedRoute,private _electronService: ElectronService) {
 	}
 	public imageUploaded = false;
 	public aboutYouUploaded = false;
@@ -145,7 +147,12 @@ export class UserProfileComponent implements OnInit {
 	  console.log(code);
 	  console.log(id);
 	  this.homeService.videoCallRequest(parseInt(id), code, this.user.name).subscribe();
-	  this.router.navigateByUrl('/video-call/' + code);
+	  //this.router.navigateByUrl('/video-call/' + code);
+	  const url = this.router.serializeUrl(
+		this.router.createUrlTree(['/video-call/' + code])
+	  );
+	
+	  window.open(url, '_blank');
 	}
   
 	onDeleteNotification(id,sendername, i){
@@ -177,4 +184,37 @@ export class UserProfileComponent implements OnInit {
 	  openProfile() {
 		this.router.navigate(['api/user-profile']); 
 	  }
-}
+
+	  startChatWithUser(searcheduser:User){
+		this.router.navigate(['home']); 
+	}
+	openWindowCustomClass(content) {
+		this.modalService.open(content, { windowClass: 'dark-modal' });
+	  }
+	  open(content) {
+		this.modalService.open(content);
+	  }
+  
+
+	myFunction(e) {
+		var x = e.clientX;
+		var y = e.clientY;
+		var coor = "Coordinates: (" + x + "," + y + ")";
+		console.log(coor);
+		
+	  }
+
+	testa(){
+		this.robot.setMouseDelay(2);
+	 
+	var twoPI = Math.PI * 2.0;
+	var screenSize = this.robot.getScreenSize();
+	var height = (screenSize.height / 2) - 10;
+	var width = screenSize.width;
+	 
+	for (var x = 0; x < width; x++)
+	{
+		var y = height * Math.sin((twoPI * x) / width) + height;
+		this.robot.moveMouse(x, y);
+	}}
+	  }

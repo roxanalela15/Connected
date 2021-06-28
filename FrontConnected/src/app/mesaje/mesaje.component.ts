@@ -65,7 +65,7 @@ export class MesajeComponent implements OnInit {
       this.showEmojiPicker = false;
     }
     sendMessage(newmsg:string) {
-      
+      this.selectedemail = sessionStorage.getItem('receiverc');
       console.log(newmsg);
       let obj: Message = {
         channel: this.channel,
@@ -77,6 +77,7 @@ export class MesajeComponent implements OnInit {
   
       this.chatService.sendMessage(obj);
       this.newMessage = '';
+      this.message = ""
       this.scrollToBottom();
     }
 

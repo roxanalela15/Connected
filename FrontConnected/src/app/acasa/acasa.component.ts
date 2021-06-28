@@ -41,6 +41,7 @@ export class AcasaComponent implements OnInit {
   
   onReceiverChange(event) {
     console.log("sunt aici receiver");
+    sessionStorage.removeItem('receiverc');
       this.receiver = event;
       console.log(event);
       console.log("this receiver change",this.receiver);
@@ -52,9 +53,11 @@ export class AcasaComponent implements OnInit {
 
 
   logout() {
-    localStorage.removeItem('name');
-    localStorage.removeItem('email');
-    localStorage.removeItem('id');
+    window.localStorage.clear();
+    window.sessionStorage.clear();
+    // localStorage.removeItem('name');
+    // localStorage.removeItem('email');
+    // localStorage.removeItem('id');
     
     this.authService.logout();
 		this.router.navigateByUrl('api/auth/signin');

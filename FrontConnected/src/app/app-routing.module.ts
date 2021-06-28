@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'api/auth/signin', component: LoginComponent },
   {path: 'home',component:AcasaComponent},
   {path: 'video-call/:id', component: VideoCallComponent},
-  {path: 'view', component: RemoteComponent},
+ // {path: 'view', component: RemoteComponent},
 ];
 
 @NgModule({

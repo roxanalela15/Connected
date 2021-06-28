@@ -100,7 +100,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["assets/js/index.js", "vue.config.js"]
           }
         },
         "lint": {

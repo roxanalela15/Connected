@@ -1,9 +1,9 @@
-/* #start {
-  margin:auto;
-  padding-left: 40%;
-  padding-top: 10%;
-} */
 
+.videostart{
+  position: absolute;
+    top: 50%;
+    left: 40%;
+}
 .container {
   display: flex;
   justify-content: space-between;
@@ -57,19 +57,23 @@ div.videostart{
 }
 
 
-/* video {
-  width: 100%;
-  height: 100%;
+
+
+/* .selfview {
+  position: absolute;
+  height: 20%;
+  width: 20%;
+  bottom: 5px;
+  right: 15px;
+  border-radius: 10px;
+  
+}
+
+.remoteview {
+  width: 100px;
+  height: 100px;
 } */
 
-#split.fullscreen{
-  z-index: 9999; 
-  width: 100%; 
-  height: 100%; 
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-}
 
 .selfview {
   position: absolute;
@@ -78,10 +82,36 @@ div.videostart{
   bottom: 5px;
   right: 15px;
   border-radius: 10px;
+  
 }
 
-/* .remoteview {
+.remoteview {
+  position: absolute;
+  top: 0;
+  bottom: 0;
   width: 100%;
-  height: 100%;
- 
+  height: 100%; 
+  overflow: hidden;
+}
+
+/* .container-fluid{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
 } */
+
+#row {
+  position:absolute;
+   top:30%;
+   left:20%;
+   z-index:1;
+ }
+ 
+ #topText {
+   color: white;
+   font-size: 20px;
+   align-self: center;
+ }

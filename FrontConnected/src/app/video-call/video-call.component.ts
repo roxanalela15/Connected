@@ -1,15 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal, NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
-// import { BrowserWindow } from 'electron';
 
-// import {ElectronService} from "ngx-electron";
 
 const MESSAGE_TYPE = {
   SDP: 'SDP',
   CANDIDATE: 'CANDIDATE',
 };
+
 
 @Component({
   selector: 'app-video-call',
@@ -22,13 +20,13 @@ export class VideoCallComponent implements OnInit {
   @ViewChild('video2', { static: true }) video2: ElementRef<HTMLVideoElement>;
   code: any;
   peerConnection: any;
-robot:any;
   cameraActivated: boolean = true;
 
   
   screenActivated: boolean = false;
 
   signaling: any;
+  remoting:any;
   senders: any = [];
   userMediaStream: any;
   userconnected:Boolean=false;
@@ -213,11 +211,14 @@ robot:any;
     this.userMediaStream.getTracks().forEach( (track) => {
       track.stop();
       localStorage.removeItem("notifUser");
-      this.router.navigate(['/api/user-profile']);
+      //this.router.navigate(['/api/user-profile']);
     });
     
     this.video1.nativeElement.srcObject = null;
     this.video2.nativeElement.srcObject = null;
+
+  
+    window.close();
     //this.videoscreen.nativeElement.srcObject = null;
   }
 
@@ -230,6 +231,7 @@ robot:any;
     }
   
     private shareScreen(): void {
+
       this.sharing = true;
       // @ts-ignore
       navigator.mediaDevices.getDisplayMedia({
@@ -251,33 +253,6 @@ robot:any;
       }).catch(err => {
         console.log('Unable to get display media ' + err);
       });
-   
-    //   var socket = this.signaling;
-    //   const win = new BrowserWindow({
-    //     width: 500,
-    //     height: 150,
-    //     webPreferences: {
-    //         nodeIntegration: true
-    //     }
-    // })
-    //   socket.on("mouse-move", function(data){
-    //     var obj = JSON.parse(data);
-    //     var x = obj.x;
-    //     var y = obj.y;
-
-    //     this.robot.moveMouse(x, y);
-    // })
-
-    // socket.on("mouse-click", function(data){
-    //     this.robot.mouseClick();
-    // })
-
-    // socket.on("type", function(data){
-    //     var obj = JSON.parse(data);
-    //     var key = obj.key;
-
-    //     this.robot.keyTap(key);
-    // })
       
     }
  
@@ -288,33 +263,63 @@ robot:any;
       sender.replaceTrack(videoTrack);
     }
   
-    requestControl(){
+    requestControl(e:MouseEvent){
+      console.log("iau control");
+      var room = "test";
+            if(room.trim().length == 0) {
+                document.write("<h1> Room ID is mandatory to join </h1>");
+                return;
+            } 
 
-      //window.open("localhost:4200/view", "_blank");
-      var socket = this.signaling;
-      var room = localStorage.getItem("codeInput");
-      // const remoteview = document.getElementById('remote-view');
-      //       remoteview.addEventListener('mouse-move', (e:MouseEvent) =>{
+            //socket = io.connect('http://localhost:5000');
+            
+            const v = document.getElementById("remote-view");
+            console.log(v);
 
-      //           var posX = $(this).offset().left;
-      //           var posY = $(this).offset().top;
+            // v.addEventListener('mouse-move', (e :MouseEvent )=>{
+              console.log("mousemove");
+                var posX = v.offsetLeft;
+                var posY = v.offsetTop;
 
-      //           var x = e.pageX - posX;
-      //           var y = e.pageY - posY;
+                var x = e.pageX - posX;
+                var y = e.pageY - posY;
 
-      //           var obj = {"x" : x, "y": y, "room": room}
-      //           socket.emit("mouse-move", JSON.stringify(obj));
+                var obj = {"x" : x, "y": y, "room": room}
+                //this.signaling.emit("mouse-move", JSON.stringify(obj));
+                this.signaling.send(JSON.stringify(obj));
 
-      //       })
+            // })
 
-      //       remoteview.addEventListener('mouse-click', e=>{
-      //           var obj = {"room" : room};
-      //           socket.emit("mouse-click", JSON.stringify(obj));
-      //       })
+            // v.addEventListener('mouse-click',(e:MouseEvent )=>{
+            //     var obj = {"room" : room};
+            //     this.signaling.send(JSON.stringify(obj));
+            //     //this.signaling.emit("mouse-click", JSON.stringify(obj));
+            // })
 
+            // $(window).bind("keyup", function(e) {
 
+            //     var obj = {"key": e.key, "room" : room};
+            //     this.signaling.emit("type", JSON.stringify(obj));
+            // })
     }
-    
 
-   
+    // startShare(){
+    //   console.log("started");
+    //   this.shareScreen();
+    //   // electron.ipcRenderer.send("start-share", {});
+    // }
+
+    // stopShare(){
+    //   console.log("stopped");
+    //   this.stopScreenShare();
+    //   //electron.ipcRenderer.send("stop-share", {});
+    // }
+    
+    myFunction(e) {
+      var x = e.clientX;
+      var y = e.clientY;
+      var coor = "Coordinates: (" + x + "," + y + ")";
+      console.log(coor);
+      
+      }
   }

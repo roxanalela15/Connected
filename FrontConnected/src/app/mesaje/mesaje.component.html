@@ -12,7 +12,7 @@
 
 <div class="type_msg">
   <div class="input_msg_write">
-    <input type="text" class="write_msg" placeholder="Type a message" #newmsg [(ngModel)]="message" />
+    <input type="text" class="write_msg" placeholder="Type a message" #newmsg [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage(newmsg.value)" />
     
     <button [disabled]="channel === null || channel === undefined" class="msg_send_btn" type="button"
       (click)=sendMessage(newmsg.value)>

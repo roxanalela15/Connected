@@ -6,14 +6,14 @@
     <script>
 
         window.onload = function() {
-            var room = localStorage.getItem("codeInput");
+            var room = "test";
             if(room.trim().length == 0) {
                 document.write("<h1> Room ID is mandatory to join </h1>");
                 return;
             }
 
-            socket = io.connect('http://localhost:4200');
-
+            socket = io.connect('http://localhost:1337');
+            console.log("m-am conectat");
             socket.emit("join-message", room);
             socket.on('screen-data', function(message){
                 $("img").attr("src", "data:image/png;base64," + message);
