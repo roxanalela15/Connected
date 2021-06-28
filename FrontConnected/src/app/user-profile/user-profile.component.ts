@@ -1,6 +1,6 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,HostListener } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,7 +21,7 @@ import {ElectronService } from 'ngx-electron';
 })
 export class UserProfileComponent implements OnInit {
 
-	robot = this._electronService.remote.require('robotjs');
+	
 	formgroup: FormGroup;
 	constructor(public authService: AuthenticationService, private searchService: SearchService,
 				private http: HttpClient, private homeService: HomePageService,
@@ -46,6 +46,7 @@ export class UserProfileComponent implements OnInit {
 	deleteSearchedUser: boolean = true;
 	notifications: Notification[];
 	notif$ = new Subject<Notification[]>();
+	
 	ngOnInit(): void {
 	  if (this.authService.isAuthenticated()) {
 		this.searchService.searchedUser.subscribe(u => {
@@ -59,7 +60,7 @@ export class UserProfileComponent implements OnInit {
 		  this.notif$.next(this.notifications);
 		  this.notif$.subscribe(nl => this.notifications = nl);
 		});
-  
+		
 		// this.getImage();
 		this.getImage();
 		setTimeout(() => {
@@ -195,7 +196,7 @@ export class UserProfileComponent implements OnInit {
 		this.modalService.open(content);
 	  }
   
-
+	
 	myFunction(e) {
 		var x = e.clientX;
 		var y = e.clientY;
@@ -204,17 +205,45 @@ export class UserProfileComponent implements OnInit {
 		
 	  }
 
-	testa(){
-		this.robot.setMouseDelay(2);
+	  public testa() {
+		
+		console.log(this._electronService.isElectronApp);
+        let robot: any = this._electronService.remote.require('robotjs');
+	
+		console.log(robot);
+        robot.setMouseDelay(2);
 	 
 	var twoPI = Math.PI * 2.0;
-	var screenSize = this.robot.getScreenSize();
+	var screenSize = robot.getScreenSize();
 	var height = (screenSize.height / 2) - 10;
 	var width = screenSize.width;
 	 
 	for (var x = 0; x < width; x++)
 	{
 		var y = height * Math.sin((twoPI * x) / width) + height;
-		this.robot.moveMouse(x, y);
-	}}
+		robot.moveMouse(x, y);
+	}
+    
+}
+
+	// testa(){
+	// 	var robot = this._electronService.remote.require('robotjs');
+	// 	robot.setMouseDelay(2);
+	 
+	// var twoPI = Math.PI * 2.0;
+	// var screenSize = robot.getScreenSize();
+	// var height = (screenSize.height / 2) - 10;
+	// var width = screenSize.width;
+	 
+	// for (var x = 0; x < width; x++)
+	// {
+	// 	var y = height * Math.sin((twoPI * x) / width) + height;
+	// 	robot.moveMouse(x, y);
+	// }}
+
+
+
+	
 	  }
+
+

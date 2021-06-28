@@ -8,7 +8,7 @@
         <a (click)="logout();"><li class="material-icons">logout</li></a>
 	</ul>
 	</div>
-    <button (click) ="testa()">testa</button>
+    
     <div class="content">
         <app-header></app-header>
         <hr>
@@ -60,7 +60,7 @@
         <hr>
         <div class="container-fluid">
            
-
+            <button (click)="testa()" style="cursor: pointer;">testa</button>
             <div class="row" *ngIf="authService.isAuthenticated()">
                 <div class="col-sm-9" *ngFor="let notif of notifications;let i=index">
                     <ngb-alert type="info">{{notif.senderName | titlecase}} invited you in a video-call.
