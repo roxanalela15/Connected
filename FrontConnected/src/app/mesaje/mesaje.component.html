@@ -1,0 +1,42 @@
+<div style="width: 100%; min-height: 480px;" class="message-col">
+  <mat-list id="msg-container" class="message-container">
+    <mat-list-item *ngFor="let message of filteredMessages" class="message-item"
+      [style.background]="message.sender === email ? '#e3effd':'#f6f6f6'">
+      <mat-icon mat-list-icon></mat-icon>
+      <h4 mat-line><b>{{message.sender === email ? 'You': message.sender}}</b>
+        : {{message.content}}</h4>
+      {{message.timestamp | date:'shortTime'}}
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<div class="type_msg">
+  <div class="input_msg_write">
+    <input type="text" class="write_msg" placeholder="Type a message" #newmsg [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage(newmsg.value)" />
+    
+    <button [disabled]="channel === null || channel === undefined" class="msg_send_btn" type="button"
+      (click)=sendMessage(newmsg.value)>
+      <!-- <i class="fa fa-paper-plane-o" aria-hidden="true"></i> -->
+      <mat-icon>send</mat-icon></button>
+  </div>
+  <!-- <button type="button" class="toggle-emoji" (click)="toggleEmojiPicker()">
+    <mat-icon>tag_faces</mat-icon>
+  </button> -->
+
+  <span class="input-group-addon">
+    <button
+    type="button"
+    class="toggle-emoji"
+    (click)="toggleEmojiPicker()"
+    ><mat-icon>tag_faces</mat-icon>
+  </button>
+</span> 
+<span class="col-md-2 input-group-addon">
+  <emoji-mart class="emoji-mart" set="apple" (emojiSelect)="addEmoji($event)" *ngIf="showEmojiPicker" title="Pick your emoji…"></emoji-mart>
+</span>
+
+
+  <!-- <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"
+    title="Pick your emoji…"></emoji-mart> -->
+  
+</div>

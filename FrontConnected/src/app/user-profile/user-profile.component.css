@@ -1,0 +1,131 @@
+
+
+
+  
+  .left {
+    width: 5%;
+    height:700px;
+    float: left;
+    padding: 10px;
+  }
+
+  
+
+
+  .row{
+    display: flex;
+    flex-direction: row;
+  }
+ 
+    button {
+      background-color: #5d5c61;
+      text-decoration: none;
+      display: inline-block;
+      margin: 4px 2px;
+      cursor: pointer;
+      text-align: center;
+    text-transform: uppercase;
+    line-height: 20px;
+    border: none !important;
+    padding: 10px 20px;
+    color: #d3d3d3;
+    font-size: 16px;
+    }
+
+    .sidenav {
+      height: 100%;
+      width: 120px;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      right:0;
+      /* background-color: #3f5058; */
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+    
+    .sidenav a {
+      padding: 6px 8px 6px 16px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #f1f1f1;
+      display: block;
+    }
+    
+    .sidenav a:hover {
+      color: #3bba9c;
+    }
+    
+    .content{
+      background-color: #f1f1f1;
+      margin-left: 160px; 
+      opacity: 0.8;
+      /* font-size: 28px;  */
+      padding: 0px 10px;
+      border: 1px solid grey;
+      margin-top: 100px;
+      width: 90%;
+      height:700px;
+      
+      }
+      a{
+        cursor: pointer;
+      }
+      
+      .container-fluid{
+        display: flex;
+  align-items: center;
+  justify-content: center
+      }
+
+      .image {
+        flex-basis: 40%
+      }
+      
+      .personaldata {
+        font-size: 20px;
+        padding-left: 20px;
+      }
+
+      button:hover{
+        background-color: #6f90a1;
+    }
+
+    .material-icons {
+      color: #fff;
+      font-size: 32px;
+      display: block;
+    }
+    
+    ul .material-icons:hover {
+      opacity: 0.5;
+    }
+
+    ul {
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      height: 280px;
+      width: 5%;
+      padding: 0;
+      text-align: center;
+       }
+      
+      #menu .material-icons {
+      margin: 20px 0;
+      transition: all .5s ease-out !important;
+      -webkit-transition: all .5s ease-out;
+      -moz-transition: all .5s ease-out;
+      -o-transition: all .5s ease-out;
+      }
+
+      #leftd,
+#rightd {
+  padding: 0.5rem;
+  flex-grow: 1;
+  position: fixed;
+}

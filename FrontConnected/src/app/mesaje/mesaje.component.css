@@ -1,0 +1,68 @@
+.message-col {
+	vertical-align: top;
+}
+
+.cell-border {
+	border: 2px solid #bbb; padding: 5px;
+}
+
+.message-item {
+	box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	margin-top: 5px;
+	/* margin-left: 10px; */
+	position: auto;
+
+}
+
+.message-container {
+	overflow-y: auto;
+	overflow-x: hidden;
+	height: 480px;
+}
+
+.message-input {
+	font-size: 24px;
+	font-family: verdana;
+	color: #202080;
+}
+
+.input_msg_write input {
+	background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+	border: medium none;
+	color: #584d4d;
+	font-size: 15px;
+	min-height: 48px;
+	width: 100%;
+}
+
+.type_msg {
+	border-top: 1px solid #c4c4c4;
+	position: relative;
+}
+
+.msg_send_btn {
+	
+	border: medium none;
+	border-radius: 50%;
+	color: #584d4d;
+	
+	cursor: pointer;
+	font-size: 17px;
+	height: 33px;
+	position: absolute;
+	right: 0;
+	top: 11px;
+	width: 44px;
+}
+.toggle-emoji{
+    padding: 10px;
+    border: 1px solid rgb(196, 196, 196);
+    background-size: cover;
+    display: inline-block;
+    height: 38px;
+    width: 38px;
+}
+.emoji-mart{
+    position: fixed
+}

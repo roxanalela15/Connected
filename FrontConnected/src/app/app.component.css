@@ -1,0 +1,29 @@
+ * {
+    box-sizing: border-box;
+  }
+  .content {
+    display: block;
+    min-height: 100vh;
+}
+
+  
+  .left {
+    width: 5%;
+    height:700px;
+    float: left;
+    padding: 10px;
+  }
+
+  
+ .right {
+    width: 5%;
+    height:700px;
+    float: right;
+    padding: 10px;
+  }
+
+  .row{
+    display: flex;
+    flex-direction: row;
+  }
+  

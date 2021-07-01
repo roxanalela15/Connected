@@ -1,0 +1,108 @@
+
+<div class="row">
+    
+    <div class="sidenav">
+		<ul id="menu">
+		<a (click)="openProfile();"><li class="material-icons">home</li></a>
+        <a (click)="openMessages();"><li class="material-icons">sms</li></a>
+        <a (click)="logout();"><li class="material-icons">logout</li></a>
+	</ul>
+	</div>
+    <div class="content">
+        <app-header></app-header>
+        <hr>
+        <header *ngIf="authService.isAuthenticated()">
+            <div class="container-fluid">
+                <div class="personaldata">
+                    <h2>{{user.name}}</h2>
+                    <button (click)="deleteAccount()">Delete your account</button>
+                
+                </div>
+               
+                <div class="image">
+                    <div class="col-sm-2 ml-3 centered text-center float-right"
+                        *ngIf="authService.isAuthenticated()">
+                        
+                        <img *ngIf="!imageUploaded" src="../../assets/images/default-user.png" style="width: 150px; height: 150px;">
+                        <br><br>
+                        <div class="row">
+                            <div class="ml-2 col-sm-7">
+                                <input type="file" (change)=onFileChanged($event)>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 mt-1">
+                            <button class="btn btn-outline-success centered text-center" type="button"
+                                (click)="onImageUpload()"> Upload</button>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 centered text-center float-right"
+                        *ngIf="imageUploaded && authService.isAuthenticated()">
+                        <a (click)="openWindowCustomClass(content)" style="cursor: pointer;">
+                            <img [src]="domSan.bypassSecurityTrustResourceUrl(pic)" alt="{{user.name}}"
+                                style="max-width: 150px; max-height: 150px; border-radius: 1%;"
+                                triggers="mouseenter:mouseleave" placement="right">
+                        </a>
+                        <br>
+                        
+                    </div>
+                </div>
+                <ng-template class="modal fade" #content let-modal>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <img class="img-responsive" [src]="domSan.bypassSecurityTrustResourceUrl(pic)"
+                                    alt="{{user.name}}" style="max-width: 400px; max-height: 400px;">
+                            </div>
+                        </div>
+                    </div>
+                   
+                </ng-template>
+            </div>
+        </header>
+        <br>
+        <hr>
+        <div class="container-fluid">
+           
+
+            <div *ngIf="authService.isAuthenticated()">
+                <div class="col-sm-9" *ngFor="let notif of notifications;let i=index">
+                    <ngb-alert type="info">{{notif.senderName | titlecase}} invited you in a video-call.
+                        <a routerLink="/video-call/{{notif.code}}"  target="_blank"
+                            (click)="onDeleteNotification(notif.id,notif.senderName,i)" style="cursor: pointer;"><strong>Join </strong></a>
+                        <a (click)="onDeleteNotification(notif.id,notif.senderName,i)" style="cursor: pointer;"><strong>Delete</strong></a>
+                    </ngb-alert>
+                </div>
+            </div>
+
+            <div *ngIf="!deleteSearchedUser && authService.isAuthenticated()">
+                <div class="leftd">
+                    <h2 style="color: #5d5c61">{{seachedUser.name}}</h2>
+                    <i style="color: #5d5c61">{{seachedUser.email}}</i>
+                                <div class="row">
+                                    
+                                    <div class="col-sm">
+                                        <button class="btn btn-primary btn-block" type="button" (click)="onVideoCall(seachedUser.userId)" *ngIf="(!isVideoCallAccepted)"
+                                            triggers="mouseenter:mouseleave" placement="right">
+                                            Invite to video call
+                                        </button>
+                                        <button class="btn btn-primary btn-block" type="button" (click)="startChatWithUser(seachedUser)"
+                                            triggers="mouseenter:mouseleave" placement="right">
+                                            Send message
+                                        </button>
+                                    </div>
+                                    <!-- <div class="col-md-10">
+                                        <video-call [userType]="userType" [caller]="caller" (callback)="CallBack($event)" *ngIf="isVideoCallAccepted">Loading</video-call>
+                                    </div> -->
+                                </div>
+                                
+                               
+                </div>
+                <div class="rightd">
+                    <img ng-src="{{seachedUser.retrievedImage}}">
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    
+</div>

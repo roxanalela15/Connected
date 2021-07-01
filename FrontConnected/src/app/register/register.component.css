@@ -1,0 +1,39 @@
+.divider-text {
+    position: relative;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.divider-text span {
+    padding: 7px;
+    font-size: 12px;
+    position: relative;   
+    z-index: 2;
+}
+.divider-text:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #d3d3d3;
+    top: 55%;
+    left: 0;
+    z-index: 1;
+}
+
+button {
+    background-color: #5d5c61;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    text-align: center;
+	text-transform: uppercase;
+	line-height: 20px;
+	border: none !important;
+	padding: 10px 20px;
+	color: #d3d3d3;
+	font-size: 16px;
+  }
+  button:hover{
+    background-color: #6f90a1;
+}
